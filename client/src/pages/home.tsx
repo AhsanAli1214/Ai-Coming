@@ -116,6 +116,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* About Us Section */}
+      <section className="py-24 px-6 border-t bg-background">
+        <div className="container mx-auto max-w-3xl text-center">
+          <div className="inline-flex p-3 rounded-2xl bg-primary/5 mb-6">
+            <Rocket className="h-6 w-6 text-primary" />
+          </div>
+          <h2 className="text-3xl font-bold mb-6">About Ahsan AI Hub</h2>
+          <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+            <p>
+              Ahsan AI Hub was founded on the principle that powerful AI should be accessible to everyone 
+              without compromising their digital privacy. 
+            </p>
+            <p className="font-medium text-foreground">
+              Our mission is to provide a comprehensive, privacy-first productivity suite that empowers 
+              creators, students, and professionals to achieve more, 100% free of charge and 
+              with zero data tracking.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="py-12 border-t mt-auto text-center px-6">
         <p className="text-muted-foreground mb-4">Ahsan AI Hub — Built by Ahsan Ali</p>
