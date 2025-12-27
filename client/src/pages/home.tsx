@@ -8,6 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   const { toast } = useToast();
@@ -27,8 +28,12 @@ export default function Home() {
   });
 
   return (
-    <div className="flex flex-col w-full min-h-screen">
-      {/* Hero Section */}
+    <div className="flex flex-col w-full min-h-screen selection:bg-primary/20">
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] rounded-full bg-primary/10 blur-[100px]" />
+      </div>
       <section className="relative py-20 px-6 overflow-hidden bg-gradient-to-b from-primary/10 via-background to-background border-b">
         <div className="container mx-auto text-center relative z-10">
           <Badge variant="outline" className="mb-6 px-4 py-1 text-sm font-medium border-primary/20 bg-primary/5 text-primary animate-pulse">
@@ -44,29 +49,52 @@ export default function Home() {
             in a seamless, secure, and professional environment.
           </p>
           
-          <form 
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (email) subscribeMutation.mutate(email);
-            }}
-            className="flex flex-col sm:flex-row justify-center gap-3 max-w-md mx-auto mb-12"
-          >
-            <Input 
-              type="email" 
-              placeholder="Enter your email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="rounded-full h-12"
-            />
-            <Button size="lg" className="rounded-full h-12 px-8" disabled={subscribeMutation.isPending}>
-              Notify Me
-            </Button>
-          </form>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-lg mx-auto mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <div className="flex-1 flex flex-col sm:flex-row gap-3">
+              <Input 
+                type="email" 
+                placeholder="Enter your email for early access" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="rounded-full h-12 bg-background/50 backdrop-blur-sm border-primary/20 focus-visible:ring-primary/30"
+              />
+              <Button size="lg" className="rounded-full h-12 px-8 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all" disabled={subscribeMutation.isPending}>
+                Notify Me
+              </Button>
+            </div>
+          </div>
 
-          <Button variant="link" asChild className="text-primary hover:text-primary/80">
-            <Link href="/manual">View Complete User Manual & Platform Details</Link>
-          </Button>
+          <div className="flex flex-col items-center gap-4">
+            <Button variant="outline" size="lg" asChild className="rounded-full border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary transition-all group">
+              <Link href="/manual">
+                More About Ahsan AI Hub
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+            <p className="text-xs text-muted-foreground/60 uppercase tracking-widest font-medium">
+              Innovation without surveillance • Intelligence without cost
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-12 border-b bg-muted/20">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { label: "AI Tools", value: "9+" },
+              { label: "Pages", value: "13+" },
+              { label: "Privacy", value: "100%" },
+              { label: "Cost", value: "$0" },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center">
+                <div className="text-3xl font-bold text-primary mb-1">{stat.value}</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
