@@ -38,7 +38,9 @@ export default function Home() {
           </h1>
           <p className="mx-auto mb-10 max-w-[800px] text-xl text-muted-foreground leading-relaxed">
             The ultimate privacy-first productivity suite. Empowering creators and students with 
-            advanced AI tools, zero data storage, and 100% free access.
+            advanced AI tools, zero data storage, and 100% free access. 
+            Experience real-time text-to-speech, contextual translations, and intelligent code assistance 
+            in a seamless, installable application.
           </p>
           
           <form 
@@ -73,7 +75,7 @@ export default function Home() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {[
             { title: "Privacy-First", icon: Shield, desc: "No data stored on servers. Your history stays on your device." },
-            { title: "Gemini 2.0 Power", icon: Zap, desc: "Powered by the latest Google Gemini 2.0 Flash model." },
+            { title: "Advanced AI Power", icon: Zap, desc: "Powered by the latest enterprise-grade AI models for maximum intelligence." },
             { title: "9+ Pro Tools", icon: Wand2, desc: "Blog generator, email writer, code explainer, and more." },
             { title: "No Login Required", icon: Rocket, desc: "Start using all features immediately without an account." },
             { title: "50+ Languages", icon: Globe, desc: "Real-time translation and multilingual chat support." },
@@ -112,6 +114,68 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Detailed Features Section */}
+      <section className="py-24 px-6 border-t">
+        <div className="container mx-auto">
+          <div className="grid gap-16 lg:grid-cols-2 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-6">Comprehensive Toolset</h2>
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="mt-1 h-8 w-8 shrink-0 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <MessageSquare size={18} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold">Intelligent Chat</h4>
+                    <p className="text-sm text-muted-foreground">Adjustable personality modes and response lengths tailored to your needs.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="mt-1 h-8 w-8 shrink-0 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Code size={18} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold">Code Explainer</h4>
+                    <p className="text-sm text-muted-foreground">Understand complex logic with line-by-line breakdowns for multiple languages.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="mt-1 h-8 w-8 shrink-0 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <BookOpen size={18} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold">Educational Support</h4>
+                    <p className="text-sm text-muted-foreground">Generate high-quality study materials and solve math problems with clear steps.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-muted/30 rounded-3xl p-8 border border-primary/10">
+              <h3 className="text-2xl font-bold mb-4">Privacy & Control</h3>
+              <p className="text-muted-foreground mb-6">
+                Unlike other platforms, Ahsan AI Hub operates entirely without server-side storage. 
+                Your conversations are private, your settings are local, and you have complete control 
+                to clear your data at any time.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-center gap-2 text-sm">
+                  <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  <span>7-Day Local Auto-Cleanup</span>
+                </li>
+                <li className="flex items-center gap-2 text-sm">
+                  <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  <span>Client-Side Request Throttling</span>
+                </li>
+                <li className="flex items-center gap-2 text-sm">
+                  <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  <span>Data Export Functionality</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
