@@ -3,6 +3,7 @@ import { Sparkles, Shield, Zap, Rocket, BookOpen, MessageSquare, Wand2, Globe, C
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
+import { Link } from "wouter";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -62,6 +63,10 @@ export default function Home() {
               Notify Me
             </Button>
           </form>
+
+          <Button variant="link" asChild className="text-primary hover:text-primary/80">
+            <Link href="/manual">View Complete User Manual & Platform Details</Link>
+          </Button>
         </div>
       </section>
 
