@@ -63,12 +63,6 @@ export const api = {
         length: z.string().optional(),
       }),
       responses: { 200: z.object({ content: z.string() }) },
-    },
-    stream: {
-      method: 'GET' as const,
-      path: '/api/ai/stream',
-      input: z.object({ prompt: z.string(), sessionId: z.string().optional() }),
-      responses: { 200: z.any() }
     }
   }
 };

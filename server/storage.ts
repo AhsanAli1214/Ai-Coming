@@ -12,6 +12,7 @@ export interface IStorage {
   getChatSession(id: number): Promise<ChatSession | undefined>;
   createChatSession(session: any): Promise<ChatSession>;
   deleteChatSession(id: number): Promise<void>;
+  deleteAllSessions(): Promise<void>;
 
   // Messages
   getMessages(sessionId: number): Promise<ChatMessage[]>;
@@ -48,13 +49,17 @@ export class DatabaseStorage implements IStorage {
     await db.delete(chatSessions).where(eq(chatSessions.id, id));
   }
 
+  async deleteAllSessions(): Promise<void> {
+    await db.delete(chatMessages);
+    await db.delete(chatSessions);
+  }
+
   async getMessages(sessionId: number): Promise<ChatMessage[]> {
     return await db.select().from(chatMessages).where(eq(chatMessages.sessionId, sessionId)).orderBy(chatMessages.createdAt);
   }
 
   async createMessage(message: any): Promise<ChatMessage> {
     const [newMessage] = await db.insert(chatMessages).values(message).returning();
-    // Update session timestamp
     await db.update(chatSessions).set({ updatedAt: new Date() }).where(eq(chatSessions.id, message.sessionId));
     return newMessage;
   }

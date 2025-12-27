@@ -2,7 +2,6 @@ import type { Express } from "express";
 import type { Server } from "http";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
-import { z } from "zod";
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 
@@ -34,13 +33,18 @@ export async function registerRoutes(
     res.status(201).json(session);
   });
 
-  app.delete(api.chat.sessions.delete.path, async (req, res) => {
+  app.delete("/api/chat/sessions/all", async (req, res) => {
+    await storage.deleteAllSessions();
+    res.status(204).end();
+  });
+
+  app.delete("/api/chat/sessions/:id", async (req, res) => {
     await storage.deleteChatSession(Number(req.params.id));
     res.status(204).end();
   });
 
   // Messages
-  app.get(api.chat.messages.list.path, async (req, res) => {
+  app.get("/api/chat/sessions/:sessionId/messages", async (req, res) => {
     const messages = await storage.getMessages(Number(req.params.sessionId));
     res.json(messages);
   });
