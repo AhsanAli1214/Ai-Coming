@@ -1,0 +1,133 @@
+You are a senior product designer, UX writer, and frontend developer.
+
+I am providing you with a long internal document that describes my product
+“Ahsan AI Hub” (features, pages, tools, values, and technical details).
+
+TASK:
+Convert this document into a modern, professional, high-impact
+**“Coming Soon / Pre-Launch Website”**.
+
+IMPORTANT GOALS:
+- This is NOT a documentation site
+- This is NOT a full product UI
+- This is a **marketing + trust-building preview website**
+- The page should create excitement, credibility, and a premium vibe
+- Keep it clean, minimal, and global-startup quality
+
+TARGET AUDIENCE:
+- Students
+- Developers
+- Creators
+- General global users
+- Early adopters
+
+TONE & STYLE:
+- Professional
+- Confident
+- Friendly
+- Privacy-first
+- Simple language (no heavy technical jargon)
+- Global & trustworthy
+
+DESIGN REQUIREMENTS:
+- Modern landing page style
+- Large hero section
+- Clear sections
+- Minimal text (summarized from the document)
+- Icons / feature cards
+- Clean spacing
+- Dark + light friendly
+- Startup / SaaS aesthetic
+
+STRUCTURE TO CREATE:
+
+1. HERO SECTION
+   - Product name: “Ahsan AI Hub”
+   - Short powerful tagline (1 line)
+   - Sub-heading explaining what it is
+   - “Launching Soon” or “Coming Soon” badge
+   - Primary CTA (Notify Me / Get Updates / Launching Soon)
+
+2. WHAT IS AHSAN AI HUB
+   - Short explanation rewritten from the document
+   - Focus on value, not technical details
+
+3. WHY IT’S DIFFERENT
+   - Privacy-First
+   - No Login Required
+   - 100% Free
+   - Global Access
+   - Powered by Advanced AI
+   - Use short feature cards
+
+4. CORE FEATURES (SUMMARIZED)
+   - AI Chat
+   - Content Creation
+   - Coding Help
+   - Study & Learning
+   - Translation & Audio
+   - PWA Installable
+   (Each with 1-line description)
+
+5. WHO IT’S FOR
+   - Students
+   - Developers
+   - Creators
+   - Professionals
+   - Learners
+
+6. TRUST & TRANSPARENCY
+   - Privacy-first promise
+   - No data storage
+   - No tracking
+   - No login required
+
+7. CREATOR SECTION
+   - “Built by Ahsan Ali”
+   - Independent developer
+   - Passionate about privacy & accessibility
+   - Optional social links
+
+8. COMING SOON SECTION
+   - Short emotional message
+   - “We’re building something powerful”
+   - Launch coming soon
+
+9. FOOTER
+   - Product name
+   - “Launching Soon”
+   - Contact email
+   - Privacy / Terms links (placeholders)
+
+OUTPUT REQUIREMENTS:
+- Convert long content into concise, high-impact website copy
+- Do NOT dump the full document
+- Rewrite everything for marketing & preview purpose
+- Make it feel like a real startup pre-launch page
+
+TECH OUTPUT (VERY IMPORTANT):
+Choose ONE of the following outputs (best possible quality):
+
+Option A:
+- Complete HTML + Tailwind CSS landing page
+
+OR
+
+Option B:
+- Next.js page (App Router) with Tailwind CSS
+
+OR
+
+Option C:
+- Clean section-by-section website copy + layout structure
+  (headings, text, CTA labels)
+
+FINAL RULES:
+- No filler text
+- No “lorem ipsum”
+- No unnecessary explanations
+- Make it production-ready
+- Make it impressive
+
+Now transform the provided document into a
+**beautiful “Coming Soon” website**.
