@@ -41,7 +41,7 @@ export default function Home() {
             The ultimate privacy-first productivity suite. Empowering creators and students with 
             advanced AI tools, zero data storage, and 100% free access. 
             Experience real-time text-to-speech, contextual translations, and intelligent code assistance 
-            in a seamless, installable application.
+            in a seamless, secure, and professional environment.
           </p>
           
           <form 
@@ -79,12 +79,12 @@ export default function Home() {
         
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {[
-            { title: "Privacy-First", icon: Shield, desc: "No data stored on servers. Your history stays on your device." },
-            { title: "Advanced AI Power", icon: Zap, desc: "Powered by the latest enterprise-grade AI models for maximum intelligence." },
-            { title: "9+ Pro Tools", icon: Wand2, desc: "Blog generator, email writer, code explainer, and more." },
-            { title: "No Login Required", icon: Rocket, desc: "Start using all features immediately without an account." },
-            { title: "50+ Languages", icon: Globe, desc: "Real-time translation and multilingual chat support." },
-            { title: "PWA Support", icon: Sparkles, desc: "Install as an app on your mobile or desktop device." }
+            { title: "Privacy-First", icon: Shield, desc: "Absolute security with local data encryption. Your history never leaves your device." },
+            { title: "Enterprise Intelligence", icon: Zap, desc: "Leveraging world-class AI models for human-like reasoning and creative power." },
+            { title: "9+ Pro Tools", icon: Wand2, desc: "Specialized suite for blog generation, email drafting, and rapid code analysis." },
+            { title: "Frictionless Access", icon: Rocket, desc: "No sign-ups, no logins. 100% of the platform is ready for you instantly." },
+            { title: "Global Reach", icon: Globe, desc: "Deep translation support for 50+ languages with contextual accuracy." },
+            { title: "Native Experience", icon: Sparkles, desc: "Progressive Web App support for a smooth mobile and desktop experience." }
           ].map((f) => (
             <Card key={f.title} className="hover-elevate border-primary/10">
               <CardHeader>

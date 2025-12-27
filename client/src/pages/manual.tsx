@@ -1,157 +1,228 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
-import { ArrowLeft, Shield, Zap, Wand2, Rocket, Globe, Sparkles, MessageSquare, Code, BookOpen, PenTool, BrainCircuit } from "lucide-react";
+import { 
+  ArrowLeft, Shield, Zap, Wand2, Rocket, Globe, Sparkles, 
+  MessageSquare, Code, BookOpen, PenTool, BrainCircuit, 
+  User, Mail, Instagram, Twitter, Github, Heart, ServerOff
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Manual() {
   return (
-    <div className="min-h-screen bg-background text-foreground py-12 px-6">
-      <div className="container mx-auto max-w-4xl">
-        <Button variant="ghost" asChild className="mb-8">
-          <Link href="/">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
-          </Link>
-        </Button>
+    <div className="min-h-screen bg-background text-foreground pb-20">
+      {/* Navigation Header */}
+      <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
+        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+          <Button variant="ghost" asChild className="hover:bg-primary/5 transition-colors">
+            <Link href="/">
+              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Dashboard
+            </Link>
+          </Button>
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-5 w-5 text-primary" />
+            <span className="font-bold tracking-tight">Ahsan AI Hub</span>
+          </div>
+        </div>
+      </nav>
 
-        <div className="space-y-12">
-          {/* Header */}
-          <section className="text-center space-y-4">
-            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">Ahsan AI Hub</h1>
-            <p className="text-xl text-muted-foreground">Complete Platform Overview & User Manual</p>
-            <div className="flex flex-wrap justify-center gap-2 pt-4">
-              <Badge variant="secondary">Privacy-First</Badge>
-              <Badge variant="secondary">100% Free</Badge>
-              <Badge variant="secondary">No Login Required</Badge>
-              <Badge variant="secondary">Advanced AI</Badge>
+      <div className="container mx-auto max-w-5xl px-6 pt-12 space-y-16">
+        {/* Hero Section */}
+        <header className="text-center space-y-6">
+          <Badge variant="secondary" className="px-4 py-1 text-sm font-medium bg-primary/10 text-primary border-primary/20">
+            Official Documentation
+          </Badge>
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
+            Platform Overview & User Manual
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Everything you need to know about the most private, powerful, and free AI productivity suite on the web.
+          </p>
+        </header>
+
+        {/* Executive Summary */}
+        <section className="grid gap-8 lg:grid-cols-3">
+          <Card className="lg:col-span-2 border-primary/10 overflow-hidden relative group">
+            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+              <BrainCircuit size={120} />
             </div>
-          </section>
-
-          {/* Executive Summary */}
-          <Card className="border-primary/10 bg-muted/30">
             <CardHeader>
-              <CardTitle>Executive Summary</CardTitle>
+              <CardTitle className="text-2xl flex items-center gap-2">
+                <Shield className="h-6 w-6 text-primary" />
+                Executive Summary
+              </CardTitle>
             </CardHeader>
-            <CardContent className="prose dark:prose-invert max-w-none">
+            <CardContent className="prose dark:prose-invert max-w-none text-lg text-muted-foreground leading-relaxed">
               <p>
                 <strong>Ahsan AI Hub</strong> is a modern, privacy-first AI platform that provides free access to advanced AI tools and services. 
-                Designed by Ahsan Ali, it prioritizes user accessibility and data security above all else.
+                Designed by Ahsan Ali, it prioritizes user accessibility and data security above all else. 
+                The platform is built on the belief that the future of AI should be democratized—accessible to all without the "data tax" or subscription fees typical of modern tech.
               </p>
-              <ul>
-                <li><strong>Privacy-First:</strong> No data stored on servers, everything stays local.</li>
-                <li><strong>Completely Free:</strong> Zero cost for all premium-grade tools.</li>
-                <li><strong>Installable:</strong> Works as a Progressive Web App (PWA) for native experience.</li>
-              </ul>
             </CardContent>
           </Card>
+          
+          <div className="space-y-4">
+            {[
+              { title: "Privacy-First", icon: ServerOff, desc: "No data stored on servers, everything stays local.", color: "text-blue-500" },
+              { title: "Completely Free", icon: Zap, desc: "Zero cost for all premium-grade tools.", color: "text-yellow-500" },
+              { title: "Installable", icon: Rocket, desc: "Works as a PWA for native experience.", color: "text-purple-500" }
+            ].map((item) => (
+              <Card key={item.title} className="border-primary/5 bg-muted/20">
+                <CardContent className="p-4 flex gap-4 items-center">
+                  <div className={`p-2 rounded-lg bg-background ${item.color}`}>
+                    <item.icon size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm">{item.title}</h4>
+                    <p className="text-xs text-muted-foreground">{item.desc}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
 
-          {/* Core Features Breakdown */}
-          <section className="space-y-6">
-            <h2 className="text-3xl font-bold">Core Features</h2>
-            <div className="grid gap-6 md:grid-cols-2">
-              <Card className="hover-elevate">
-                <CardHeader>
-                  <MessageSquare className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle>AI Chat Interface</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  Real-time conversation with multiple personality modes (Friendly, Professional, Creative, Teacher). 
-                  Includes text-to-speech and instant translation in 50+ languages.
-                </CardContent>
-              </Card>
-              <Card className="hover-elevate">
-                <CardHeader>
-                  <PenTool className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle>Content Tools</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  A suite of 9 specialized tools: Text Enhancer, Email Writer, Blog Generator, Social Media Post Creator, and more.
-                </CardContent>
-              </Card>
-              <Card className="hover-elevate">
-                <CardHeader>
-                  <Code className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle>Code Assistance</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  Line-by-line explanations, debugging help, and logic breakdowns for 50+ programming languages.
-                </CardContent>
-              </Card>
-              <Card className="hover-elevate">
-                <CardHeader>
-                  <BookOpen className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle>Learning Suite</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  Study Material Generator and Math Solver with detailed step-by-step solutions for complex problems.
-                </CardContent>
-              </Card>
-            </div>
-          </section>
-
-          {/* User Manual */}
-          <section className="space-y-6">
-            <h2 className="text-3xl font-bold">User Manual</h2>
-            <Card>
-              <CardContent className="pt-6 space-y-8">
-                <div className="space-y-4">
-                  <h3 className="text-xl font-bold flex items-center gap-2">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm">1</span>
-                    Getting Started
-                  </h3>
-                  <p className="text-muted-foreground pl-10">
-                    Visit the platform—no registration is needed. You'll land on the Home dashboard where you can 
-                    immediately access the Chat or any of the 9 Content Tools.
-                  </p>
-                </div>
-                <div className="space-y-4">
-                  <h3 className="text-xl font-bold flex items-center gap-2">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm">2</span>
-                    Customizing Experience
-                  </h3>
-                  <p className="text-muted-foreground pl-10">
-                    Navigate to Settings to adjust the AI Personality Mode. Choose "Professional" for work, 
-                    "Teacher" for learning, or "Creative" for brainstorming. You can also set preferred response lengths.
-                  </p>
-                </div>
-                <div className="space-y-4">
-                  <h3 className="text-xl font-bold flex items-center gap-2">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm">3</span>
-                    Managing Data
-                  </h3>
-                  <p className="text-muted-foreground pl-10">
-                    Your history is stored in your browser's local storage. You can view past chats in the History page, 
-                    export them as JSON, or clear them permanently from the Settings menu.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </section>
-
-          {/* Technical Specifications */}
-          <section className="space-y-6 pb-12">
-            <h2 className="text-3xl font-bold">Technical Specifications</h2>
-            <div className="grid gap-4 text-sm">
-              <div className="flex justify-between py-2 border-b">
-                <span className="font-medium">Framework</span>
-                <span className="text-muted-foreground">Next.js 15+</span>
+        {/* Meet the Developer */}
+        <section className="bg-muted/30 rounded-3xl p-8 md:p-12 border border-border">
+          <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-center">
+            <div className="text-center md:text-left space-y-4">
+              <div className="w-32 h-32 mx-auto md:mx-0 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <User size={64} />
               </div>
-              <div className="flex justify-between py-2 border-b">
-                <span className="font-medium">AI Intelligence</span>
-                <span className="text-muted-foreground">Advanced Enterprise Models</span>
+              <div>
+                <h3 className="text-2xl font-bold">Ahsan Ali</h3>
+                <p className="text-primary font-medium">CIT Student & Visionary Developer</p>
               </div>
-              <div className="flex justify-between py-2 border-b">
-                <span className="font-medium">Storage Method</span>
-                <span className="text-muted-foreground">IndexedDB / LocalStorage (Client-only)</span>
-              </div>
-              <div className="flex justify-between py-2 border-b">
-                <span className="font-medium">Language Support</span>
-                <span className="text-muted-foreground">50+ Languages (AI Contextual)</span>
+              <div className="flex justify-center md:justify-start gap-3">
+                <Button size="icon" variant="outline" className="rounded-full" asChild>
+                  <a href="https://instagram.com/ahsan.ali.wadani" target="_blank" rel="noreferrer"><Instagram size={18} /></a>
+                </Button>
+                <Button size="icon" variant="outline" className="rounded-full" asChild>
+                  <a href="https://twitter.com/Ahsan_Ali_12" target="_blank" rel="noreferrer"><Twitter size={18} /></a>
+                </Button>
+                <Button size="icon" variant="outline" className="rounded-full" asChild>
+                  <a href="https://ahsan-tech-hub.blogspot.com" target="_blank" rel="noreferrer"><Globe size={18} /></a>
+                </Button>
               </div>
             </div>
-          </section>
-        </div>
+            <div className="space-y-6">
+              <h2 className="text-3xl font-bold">The Visionary Behind the Hub</h2>
+              <p className="text-muted-foreground leading-relaxed">
+                As a Computer Information Technology student, Ahsan Ali recognized the growing gap in AI accessibility. 
+                Most powerful models were hidden behind paywalls or required users to surrender their digital privacy. 
+                Ahsan AI Hub was created to bridge this gap, providing a secure sanctuary where anyone can leverage 
+                cutting-edge intelligence for learning, building, and creating.
+              </p>
+              <div className="flex items-center gap-2 text-primary">
+                <Heart className="fill-current h-5 w-5" />
+                <span className="font-bold">Built for the community, powered by passion.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Feature Breakdown */}
+        <section className="space-y-12">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold mb-4">Core Capabilities</h2>
+            <p className="text-muted-foreground">Professional-grade tools distributed across 13 specialized pages.</p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              { title: "Intelligent Chat", icon: MessageSquare, desc: "Dynamic conversations with modes like 'Friendly' or 'Teacher'. Supports 50+ languages." },
+              { title: "Content Suite", icon: PenTool, desc: "9 specialized tools for blogs, emails, social media, and academic writing." },
+              { title: "Code Assistance", icon: Code, desc: "Deep logic analysis and debugging help for over 50 programming languages." },
+              { title: "Academic Solver", icon: BookOpen, desc: "Step-by-step math solutions and automated study guide generation." },
+              { title: "Audio & Speech", icon: Zap, desc: "Instant text-to-speech for all AI responses to help with auditory learning." },
+              { title: "Local History", icon: Globe, desc: "7-day auto-saved local storage allows you to resume any task anytime." }
+            ].map((item) => (
+              <Card key={item.title} className="hover-elevate transition-all border-primary/5 hover:border-primary/20">
+                <CardHeader>
+                  <item.icon className="h-10 w-10 text-primary mb-2 opacity-80" />
+                  <CardTitle>{item.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground leading-relaxed">
+                  {item.desc}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* User Manual Section */}
+        <section className="space-y-8 bg-primary/5 rounded-3xl p-8 md:p-12">
+          <h2 className="text-3xl font-bold text-center">Comprehensive User Guide</h2>
+          <div className="grid gap-12 lg:grid-cols-2">
+            <div className="space-y-8">
+              <h3 className="text-2xl font-bold border-b pb-2">1. Getting Started</h3>
+              <ul className="space-y-4">
+                <li className="flex gap-3">
+                  <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-xs font-bold">1</div>
+                  <p className="text-sm text-muted-foreground">Access <strong>https://ahsan-ai-hub.vercel.app</strong> on any browser.</p>
+                </li>
+                <li className="flex gap-3">
+                  <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-xs font-bold">2</div>
+                  <p className="text-sm text-muted-foreground">No registration is needed. You land directly on your private dashboard.</p>
+                </li>
+                <li className="flex gap-3">
+                  <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-xs font-bold">3</div>
+                  <p className="text-sm text-muted-foreground">Click "AI Chat" or pick a specific tool from "Content Suite" to begin.</p>
+                </li>
+              </ul>
+
+              <h3 className="text-2xl font-bold border-b pb-2 mt-12">2. Personalization</h3>
+              <ul className="space-y-4">
+                <li className="flex gap-3">
+                  <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-xs font-bold">1</div>
+                  <p className="text-sm text-muted-foreground">Go to <strong>Settings</strong> to toggle between Dark/Light/System themes.</p>
+                </li>
+                <li className="flex gap-3">
+                  <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-xs font-bold">2</div>
+                  <p className="text-sm text-muted-foreground">Set your AI Personality: <strong>Teacher</strong> for learning, <strong>Creative</strong> for ideas.</p>
+                </li>
+              </ul>
+            </div>
+
+            <div className="space-y-8">
+              <h3 className="text-2xl font-bold border-b pb-2">3. Data & Privacy</h3>
+              <div className="space-y-4">
+                <Card className="border-none bg-background/50">
+                  <CardContent className="p-4 space-y-2">
+                    <h4 className="font-bold flex items-center gap-2">
+                      <Shield className="h-4 w-4 text-green-500" /> 
+                      Client-Side Storage
+                    </h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      All conversation history is encrypted and stored in your browser's IndexedDB. 
+                      Ahsan AI Hub never uploads your prompts to a central server for logging. 
+                      You are the sole owner of your data.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card className="border-none bg-background/50">
+                  <CardContent className="p-4 space-y-2">
+                    <h4 className="font-bold flex items-center gap-2">
+                      <Zap className="h-4 w-4 text-yellow-500" /> 
+                      Instant Cleanup
+                    </h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Need a fresh start? Use the "Clear All History" button in Settings to 
+                      wipe all local data instantly.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer info */}
+        <section className="text-center pt-10">
+          <p className="text-muted-foreground italic mb-6">"Innovation without surveillance. Intelligence without cost."</p>
+          <Button size="lg" className="rounded-full px-10 h-14" asChild>
+            <Link href="/">Return to Dashboard</Link>
+          </Button>
+        </section>
       </div>
     </div>
   );
