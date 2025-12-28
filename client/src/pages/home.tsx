@@ -65,7 +65,18 @@ export default function Home() {
                 required
                 className="rounded-full h-12 bg-background/50 backdrop-blur-sm border-primary/20 focus-visible:ring-primary/30"
               />
-              <Button size="lg" className="rounded-full h-12 px-8 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all" disabled={subscribeMutation.isPending}>
+              <Button 
+                size="lg" 
+                className="rounded-full h-12 px-8 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all" 
+                disabled={subscribeMutation.isPending}
+                onClick={() => {
+                  if (email && /^\S+@\S+\.\S+$/.test(email)) {
+                    subscribeMutation.mutate(email);
+                  } else {
+                    toast({ title: "Invalid Email", description: "Please enter a valid email address.", variant: "destructive" });
+                  }
+                }}
+              >
                 Notify Me
               </Button>
             </div>
