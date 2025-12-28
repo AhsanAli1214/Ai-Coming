@@ -10,6 +10,9 @@ import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
 
+import logoImg from "@assets/icon-removebg-preview_1766949541761.png";
+import homeScreenshot from "@assets/image_1766949551550.png";
+
 export default function Home() {
   const { toast } = useToast();
   const [email, setEmail] = useState("");
@@ -39,6 +42,9 @@ export default function Home() {
           <Badge variant="outline" className="mb-6 px-4 py-1 text-sm font-medium border-primary/20 bg-primary/5 text-primary animate-pulse">
             ✨ Launching Soon
           </Badge>
+          <div className="flex justify-center mb-6">
+            <img src={logoImg} alt="Ahsan AI Hub Logo" className="h-24 w-24 md:h-32 md:w-32 object-contain hover:scale-105 transition-transform duration-300" />
+          </div>
           <h1 className="mb-6 text-5xl font-extrabold tracking-tight lg:text-7xl">
             Ahsan AI Hub
           </h1>
@@ -65,7 +71,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-4 mb-12">
             <Button variant="outline" size="lg" asChild className="rounded-full border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary transition-all group">
               <Link href="/manual">
                 More About Ahsan AI Hub
@@ -75,6 +81,11 @@ export default function Home() {
             <p className="text-xs text-muted-foreground/60 uppercase tracking-widest font-medium">
               Innovation without surveillance • Intelligence without cost
             </p>
+          </div>
+
+          {/* Screenshot Preview */}
+          <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-primary/10 shadow-2xl shadow-primary/5">
+            <img src={homeScreenshot} alt="Ahsan AI Hub Interface Preview" className="w-full h-auto object-cover" />
           </div>
         </div>
       </section>

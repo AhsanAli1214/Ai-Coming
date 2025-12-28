@@ -8,6 +8,11 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import logoImg from "@assets/icon-removebg-preview_1766949541761.png";
+import studioScreenshot from "@assets/image_1766949590945.png";
+import settingsScreenshot from "@assets/image_1766949639025.png";
+import aboutScreenshot from "@assets/image_1766949663942.png";
+
 export default function Manual() {
   return (
     <div className="min-h-screen bg-background text-foreground pb-20">
@@ -19,8 +24,8 @@ export default function Manual() {
               <ArrowLeft className="mr-2 h-4 w-4" /> Back to Dashboard
             </Link>
           </Button>
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-primary" />
+          <div className="flex items-center gap-3">
+            <img src={logoImg} alt="Logo" className="h-8 w-8 object-contain" />
             <span className="font-bold tracking-tight">Ahsan AI Hub</span>
           </div>
         </div>
@@ -32,6 +37,9 @@ export default function Manual() {
           <Badge variant="secondary" className="px-4 py-1 text-sm font-medium bg-primary/10 text-primary border-primary/20">
             Official Documentation
           </Badge>
+          <div className="flex justify-center mb-4">
+            <img src={logoImg} alt="Ahsan AI Hub" className="h-20 w-20 object-contain drop-shadow-lg" />
+          </div>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
             Platform Overview & User Manual
           </h1>
@@ -39,6 +47,23 @@ export default function Manual() {
             Everything you need to know about the most private, powerful, and free AI productivity suite on the web.
           </p>
         </header>
+
+        {/* Studio Preview */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-3xl font-bold">The AI Studio</h2>
+            <Badge variant="outline">Interface Preview</Badge>
+          </div>
+          <Card className="overflow-hidden border-primary/10">
+            <img src={studioScreenshot} alt="AI Studio Interface" className="w-full h-auto" />
+            <CardContent className="p-6 bg-muted/20">
+              <p className="text-muted-foreground leading-relaxed">
+                The content studio provides a precision-engineered workspace for professional text enhancement, 
+                blog generation, and code explanation—all powered by the latest Gemini 2.0 Flash models.
+              </p>
+            </CardContent>
+          </Card>
+        </section>
 
         {/* Executive Summary */}
         <section className="grid gap-8 lg:grid-cols-3">
@@ -184,7 +209,28 @@ export default function Manual() {
               </ul>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold border-b pb-2">Customization Interface</h3>
+              <Card className="overflow-hidden border-primary/10">
+                <img src={settingsScreenshot} alt="Settings Interface" className="w-full h-auto" />
+              </Card>
+              <p className="text-sm text-muted-foreground italic">
+                Choose from multiple color themes (Aurora, Ocean, Forest) and adjust response lengths in the local settings dashboard.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Meet the Developer Section with Screenshot */}
+        <section className="space-y-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold">Meet the Developer</h2>
+            <p className="text-muted-foreground">The vision behind the hub.</p>
+          </div>
+          <Card className="overflow-hidden border-primary/10 max-w-4xl mx-auto">
+            <img src={aboutScreenshot} alt="About the Developer Interface" className="w-full h-auto" />
+          </Card>
+        </section>
               <h3 className="text-2xl font-bold border-b pb-2">3. Data & Privacy</h3>
               <div className="space-y-4">
                 <Card className="border-none bg-background/50">
