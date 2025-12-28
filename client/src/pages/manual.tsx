@@ -231,35 +231,36 @@ export default function Manual() {
             <img src={aboutScreenshot} alt="About the Developer Interface" className="w-full h-auto" />
           </Card>
         </section>
-              <h3 className="text-2xl font-bold border-b pb-2">3. Data & Privacy</h3>
-              <div className="space-y-4">
-                <Card className="border-none bg-background/50">
-                  <CardContent className="p-4 space-y-2">
-                    <h4 className="font-bold flex items-center gap-2">
-                      <Shield className="h-4 w-4 text-green-500" /> 
-                      Client-Side Storage
-                    </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      All conversation history is encrypted and stored in your browser's IndexedDB. 
-                      Ahsan AI Hub never uploads your prompts to a central server for logging. 
-                      You are the sole owner of your data.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card className="border-none bg-background/50">
-                  <CardContent className="p-4 space-y-2">
-                    <h4 className="font-bold flex items-center gap-2">
-                      <Zap className="h-4 w-4 text-yellow-500" /> 
-                      Instant Cleanup
-                    </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      Need a fresh start? Use the "Clear All History" button in Settings to 
-                      wipe all local data instantly.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+
+        {/* Data & Privacy Section */}
+        <section className="space-y-8 bg-primary/5 rounded-3xl p-8 md:p-12">
+          <h3 className="text-2xl font-bold border-b pb-2 text-center">3. Data & Privacy</h3>
+          <div className="grid gap-8 md:grid-cols-2">
+            <Card className="border-none bg-background/50">
+              <CardContent className="p-4 space-y-2">
+                <h4 className="font-bold flex items-center gap-2">
+                  <Shield className="h-4 w-4 text-green-500" /> 
+                  Client-Side Storage
+                </h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  All conversation history is encrypted and stored in your browser's IndexedDB. 
+                  Ahsan AI Hub never uploads your prompts to a central server for logging. 
+                  You are the sole owner of your data.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="border-none bg-background/50">
+              <CardContent className="p-4 space-y-2">
+                <h4 className="font-bold flex items-center gap-2">
+                  <Zap className="h-4 w-4 text-yellow-500" /> 
+                  Instant Cleanup
+                </h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Need a fresh start? Use the "Clear All History" button in Settings to 
+                  wipe all local data instantly.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
