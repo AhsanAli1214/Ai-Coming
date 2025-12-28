@@ -41,3 +41,9 @@ waitForPort = 5000
 [agent]
 integrations = ["javascript_gemini_ai_integrations:2.0.0"]
 expertMode = true
+
+[userenv]
+
+[userenv.shared]
+SUPABASE_ANON_KEY = "sb_publishable_QgmAcr-AdVRog2snDbJzng_5TjkQFZq"
+SUPABASE_URL = "https://fytpxckbjidtowaxbdha.supabase.co"
