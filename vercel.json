@@ -4,21 +4,25 @@
     {
       "src": "package.json",
       "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/server/index.ts"
     },
     {
-      "src": "/(.*)",
-      "dest": "/client/dist/$1",
+      "src": "client/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "server/index.ts"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "client/$1",
       "check": true
     },
     {
-      "src": "/(.*)",
-      "dest": "/client/dist/index.html"
+      "source": "/(.*)",
+      "destination": "client/index.html"
     }
   ]
 }
