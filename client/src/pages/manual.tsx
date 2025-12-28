@@ -184,7 +184,7 @@ export default function Manual() {
               <ul className="space-y-4">
                 <li className="flex gap-3">
                   <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-xs font-bold">1</div>
-                  <p className="text-sm text-muted-foreground">Access <strong>https://ahsan-ai-hub.vercel.app</strong> on any browser.</p>
+                  <p className="text-sm text-muted-foreground">Access the official hub on any modern browser.</p>
                 </li>
                 <li className="flex gap-3">
                   <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-xs font-bold">2</div>
