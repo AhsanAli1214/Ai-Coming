@@ -134,7 +134,8 @@ export default function Manual() {
               { title: "Code Assistance", icon: Code, desc: "Deep logic analysis and debugging help for over 50 programming languages." },
               { title: "Academic Solver", icon: BookOpen, desc: "Step-by-step math solutions and automated study guide generation." },
               { title: "Audio & Speech", icon: Zap, desc: "Instant text-to-speech for all AI responses to help with auditory learning." },
-              { title: "Local History", icon: Globe, desc: "7-day auto-saved local storage allows you to resume any task anytime." }
+              { title: "Local History", icon: Globe, desc: "7-day auto-saved local storage allows you to resume any task anytime." },
+              { title: "React Suspense Integration", icon: Sparkles, desc: "Optimized loading states using React Suspense for a smoother, flicker-free user experience during AI response generation." }
             ].map((item) => (
               <Card key={item.title} className="hover-elevate transition-all border-primary/5 hover:border-primary/20">
                 <CardHeader>
