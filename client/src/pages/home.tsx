@@ -30,7 +30,7 @@ export default function Home() {
       if (error.message.includes("409")) message = "You are already on the waitlist!";
       if (error.message.includes("400")) message = "Please enter a valid email address.";
       
-      toast({ title: "Waitlist Error", description: message, variant: "destructive" });
+      toast({ title: "Waitlist Status", description: message, variant: message.includes("already") ? "default" : "destructive" });
     },
   });
 
@@ -105,11 +105,35 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Screenshot Preview */}
-          <div className="relative max-w-5xl mx-auto group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-blue-500/50 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
-            <div className="relative rounded-2xl overflow-hidden border border-primary/10 shadow-2xl bg-background">
+          <div className="relative group mt-20 max-w-5xl mx-auto">
+            <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 to-blue-500/30 rounded-[2rem] blur-2xl opacity-10 group-hover:opacity-30 transition duration-1000 group-hover:duration-200" />
+            <div className="relative rounded-2xl overflow-hidden border border-primary/10 shadow-2xl bg-background/80 backdrop-blur-sm">
               <img src={homeScreenshot} alt="Ahsan AI Hub Interface Preview" className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.01]" />
+              
+              {/* Technical Overlay */}
+              <div className="absolute bottom-6 right-6 hidden md:block">
+                <div className="bg-black/80 backdrop-blur-2xl border border-white/10 p-5 rounded-2xl shadow-2xl space-y-4 max-w-xs ring-1 ring-white/5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/90">Privacy Pulse Active</span>
+                    </div>
+                    <Badge variant="outline" className="text-[8px] h-4 border-white/10 text-white/40">v1.0.4</Badge>
+                  </div>
+                  <div className="space-y-1.5">
+                    <div className="flex justify-between text-[8px] text-white/40 uppercase tracking-tighter">
+                      <span>Encryption Depth</span>
+                      <span>256-bit AES</span>
+                    </div>
+                    <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-primary to-blue-400 w-[92%] animate-shimmer" />
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-white/60 leading-relaxed font-light">
+                    Zero-Persistence Protocol active. All local metadata verified and isolated.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -259,23 +283,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Us Section */}
-      <section className="py-24 px-6 border-t bg-background">
-        <div className="container mx-auto max-w-3xl text-center">
-          <div className="inline-flex p-3 rounded-2xl bg-primary/5 mb-6">
-            <Rocket className="h-6 w-6 text-primary" />
+      {/* About Us Section - Reimagined */}
+      <section className="py-32 px-6 border-t bg-gradient-to-b from-background to-muted/10 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[120px] rounded-full opacity-50" />
+        </div>
+        
+        <div className="container mx-auto max-w-4xl text-center relative z-10">
+          <div className="inline-flex p-4 rounded-3xl bg-primary/10 mb-8 border border-primary/20 shadow-inner">
+            <Rocket className="h-8 w-8 text-primary animate-float" />
           </div>
-          <h2 className="text-3xl font-bold mb-6">About Ahsan AI Hub</h2>
-          <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+          <h2 className="text-4xl md:text-5xl font-black mb-8 tracking-tighter">The Ahsan AI Vision</h2>
+          <div className="space-y-6 text-xl text-muted-foreground leading-relaxed font-light">
             <p>
-              Ahsan AI Hub was founded on the principle that powerful AI should be accessible to everyone 
-              without compromising their digital privacy. 
+              Ahsan AI Hub isn't just a collection of tools; it's a statement against the commoditization of personal data. 
+              Founded by <span className="text-foreground font-semibold">Ahsan Ali</span>, we believe that the power of 
+              artificial intelligence should be a basic human right, accessible without a price tag or a privacy cost.
             </p>
-            <p className="font-medium text-foreground">
-              Our mission is to provide a comprehensive, privacy-first productivity suite that empowers 
-              creators, students, and professionals to achieve more, 100% free of charge and 
-              with zero data tracking.
+            <p className="text-foreground font-medium">
+              We leverage the world's most advanced large language models through a secure, transparent relay that 
+              prioritizes your digital sovereignty above all else.
             </p>
+          </div>
+          
+          <div className="mt-16 pt-16 border-t border-primary/10 flex flex-wrap justify-center gap-12 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+             <div className="flex items-center gap-2 font-bold text-sm tracking-widest uppercase">Secure</div>
+             <div className="flex items-center gap-2 font-bold text-sm tracking-widest uppercase">Open</div>
+             <div className="flex items-center gap-2 font-bold text-sm tracking-widest uppercase">Private</div>
+             <div className="flex items-center gap-2 font-bold text-sm tracking-widest uppercase">Free</div>
           </div>
         </div>
       </section>

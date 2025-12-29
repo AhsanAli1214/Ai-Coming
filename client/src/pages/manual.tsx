@@ -195,6 +195,51 @@ export default function Manual() {
           </div>
         </section>
 
+        {/* Privacy Protocol 1.0 */}
+        <section className="space-y-8 bg-black/40 backdrop-blur-3xl rounded-[2.5rem] p-8 md:p-12 border border-primary/20 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-12 opacity-10">
+            <Shield size={180} />
+          </div>
+          <div className="relative z-10 space-y-6">
+            <Badge variant="outline" className="text-primary border-primary/30 px-4 py-1">Technical Specification</Badge>
+            <h2 className="text-4xl font-black tracking-tight">Privacy Protocol 1.0</h2>
+            <p className="text-xl text-muted-foreground font-light leading-relaxed max-w-3xl">
+              Ahsan AI Hub operates on a "Zero-Persistence" architecture. Unlike traditional AI platforms 
+              that store your data to train models, our protocol ensures your intellectual property never 
+              leaves your control.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6 pt-8">
+              {[
+                { title: "Local Encryption", desc: "AES-256 equivalent browser-level encryption for all chat logs.", icon: Shield },
+                { title: "No Server Logging", desc: "Our Express backend serves as a transparent relay with zero database persistence for prompts.", icon: ServerOff },
+                { title: "Instant Purge", desc: "One-click 'Nuclear Option' in settings to wipe all metadata and history permanently.", icon: Zap }
+              ].map((tech) => (
+                <div key={tech.title} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/30 transition-colors">
+                  <tech.icon className="h-8 w-8 text-primary mb-4" />
+                  <h4 className="font-bold mb-2">{tech.title}</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{tech.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Vision & Mission */}
+        <section className="text-center space-y-8 py-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 mb-4">
+            <Sparkles size={16} />
+            <span className="text-sm font-bold tracking-wider uppercase">The Vision</span>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter">Democratizing Intelligence</h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed italic">
+            "The future of artificial intelligence shouldn't be a luxury. It should be a fundamental utility 
+            that respects human autonomy and digital sovereignty."
+          </p>
+          <div className="flex justify-center pt-8">
+            <div className="h-1 w-24 bg-gradient-to-r from-transparent via-primary to-transparent" />
+          </div>
+        </section>
+
         {/* User Manual Section */}
         <section className="space-y-8 bg-primary/5 rounded-3xl p-8 md:p-12">
           <h2 className="text-3xl font-bold text-center">Comprehensive User Guide</h2>
@@ -231,13 +276,75 @@ export default function Manual() {
 
             <div className="space-y-6">
               <h3 className="text-2xl font-bold border-b pb-2">Customization Interface</h3>
-              <Card className="overflow-hidden border-primary/10">
-                <img src={settingsScreenshot} alt="Settings Interface" className="w-full h-auto" />
+              <Card className="overflow-hidden border-primary/10 shadow-xl group">
+                <img src={settingsScreenshot} alt="Settings Interface" className="w-full h-auto transition-transform duration-700 group-hover:scale-105" />
               </Card>
-              <p className="text-sm text-muted-foreground italic">
-                Choose from multiple color themes (Aurora, Ocean, Forest) and adjust response lengths in the local settings dashboard.
-              </p>
+              <div className="p-4 rounded-xl bg-primary/5 border border-primary/10 space-y-2">
+                <p className="text-sm font-bold flex items-center gap-2">
+                  <Zap size={14} className="text-primary" />
+                  Pro Tip: Personality Mapping
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Switching to "Teacher" mode automatically activates step-by-step logic breakdown, 
+                  while "Creative" mode optimizes for metaphorical depth and narrative flow.
+                </p>
+              </div>
             </div>
+          </div>
+        </section>
+
+        {/* Detailed Capabilities Matrix */}
+        <section className="space-y-12 py-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl font-black tracking-tight">Advanced Engineering Matrix</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Our tools are precision-tuned for specific high-performance workflows.
+            </p>
+          </div>
+          
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { 
+                category: "Linguistic Engine", 
+                tools: ["Contextual Translator", "Grammar Architect", "Semantic Refiner"],
+                latency: "< 400ms",
+                color: "border-blue-500/20"
+              },
+              { 
+                category: "Creative Suite", 
+                tools: ["Blog Architect", "Social Strategist", "Copy Alchemist"],
+                latency: "< 650ms",
+                color: "border-purple-500/20"
+              },
+              { 
+                category: "Logic & Code", 
+                tools: ["Algorithm Explainer", "Logic Debugger", "Syntax Optimizer"],
+                latency: "< 500ms",
+                color: "border-green-500/20"
+              },
+              { 
+                category: "Academic Core", 
+                tools: ["Concept Teacher", "Study Guide Generator", "Step-by-Step Solver"],
+                latency: "< 700ms",
+                color: "border-yellow-500/20"
+              }
+            ].map((cat) => (
+              <div key={cat.category} className={`p-6 rounded-3xl bg-muted/30 border ${cat.color} space-y-6 hover-elevate`}>
+                <h4 className="font-black text-sm uppercase tracking-widest text-primary">{cat.category}</h4>
+                <ul className="space-y-3">
+                  {cat.tools.map(tool => (
+                    <li key={tool} className="text-sm font-medium flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary/40" />
+                      {tool}
+                    </li>
+                  ))}
+                </ul>
+                <div className="pt-4 border-t border-primary/5 flex justify-between items-center text-[10px] font-bold text-muted-foreground">
+                  <span>LATENCY TARGET</span>
+                  <span className="text-primary">{cat.latency}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
