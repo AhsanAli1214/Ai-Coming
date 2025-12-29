@@ -26,9 +26,10 @@ export default function Home() {
       setEmail("");
     },
     onError: (error: Error) => {
-      const message = error.message.includes("409") 
-        ? "You are already on the waitlist!" 
-        : "Something went wrong. Please check your connection or try again.";
+      let message = "Something went wrong. Please check your connection or try again.";
+      if (error.message.includes("409")) message = "You are already on the waitlist!";
+      if (error.message.includes("400")) message = "Please enter a valid email address.";
+      
       toast({ title: "Waitlist Error", description: message, variant: "destructive" });
     },
   });
