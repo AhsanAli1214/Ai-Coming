@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import logoImg from "@assets/icon-removebg-preview_1766949541761.png";
+import developerImg from "@assets/0eb1ba8c-defa-4ec1-beea-894ddf7269e8_1767021499230.jpg";
 import studioScreenshot from "@assets/image_1766949590945.png";
 import settingsScreenshot from "@assets/image_1766949639025.png";
 import aboutScreenshot from "@assets/image_1766949663942.png";
@@ -110,39 +111,64 @@ export default function Manual() {
         </section>
 
         {/* Meet the Developer */}
-        <section className="bg-muted/30 rounded-3xl p-8 md:p-12 border border-border">
-          <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-center">
-            <div className="text-center md:text-left space-y-4">
-              <div className="w-32 h-32 mx-auto md:mx-0 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                <User size={64} />
+        <section className="bg-muted/30 rounded-3xl p-8 md:p-12 border border-border overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-3xl -mr-32 -mt-32 rounded-full" />
+          <div className="grid md:grid-cols-[1.5fr_2.5fr] gap-12 items-center relative z-10">
+            <div className="text-center md:text-left space-y-6">
+              <div className="relative inline-block group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500" />
+                <div className="relative w-48 h-64 mx-auto md:mx-0 rounded-2xl overflow-hidden border-2 border-primary/20 bg-background shadow-2xl">
+                  <img 
+                    src={developerImg} 
+                    alt="Ahsan Ali" 
+                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" 
+                  />
+                </div>
+                <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground p-3 rounded-xl shadow-xl">
+                  <Heart className="fill-current h-6 w-6 animate-pulse" />
+                </div>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold">Ahsan Ali</h3>
-                <p className="text-primary font-medium">CIT Student & Visionary Developer</p>
+              <div className="space-y-1">
+                <h3 className="text-3xl font-black tracking-tight">Ahsan Ali</h3>
+                <p className="text-primary font-bold tracking-widest uppercase text-xs">CIT Student & Lead Architect</p>
               </div>
               <div className="flex justify-center md:justify-start gap-3">
-                <Button size="icon" variant="outline" className="rounded-full" asChild>
+                <Button size="icon" variant="outline" className="rounded-full hover-elevate" asChild>
                   <a href="https://instagram.com/ahsan.ali.wadani" target="_blank" rel="noreferrer"><Instagram size={18} /></a>
                 </Button>
-                <Button size="icon" variant="outline" className="rounded-full" asChild>
+                <Button size="icon" variant="outline" className="rounded-full hover-elevate" asChild>
                   <a href="https://twitter.com/Ahsan_Ali_12" target="_blank" rel="noreferrer"><Twitter size={18} /></a>
                 </Button>
-                <Button size="icon" variant="outline" className="rounded-full" asChild>
+                <Button size="icon" variant="outline" className="rounded-full hover-elevate" asChild>
                   <a href="https://ahsan-tech-hub.blogspot.com" target="_blank" rel="noreferrer"><Globe size={18} /></a>
                 </Button>
               </div>
             </div>
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold">The Visionary Behind the Hub</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                As a Computer Information Technology student, Ahsan Ali recognized the growing gap in AI accessibility. 
-                Most powerful models were hidden behind paywalls or required users to surrender their digital privacy. 
-                Ahsan AI Hub was created to bridge this gap, providing a secure sanctuary where anyone can leverage 
-                cutting-edge intelligence for learning, building, and creating.
-              </p>
-              <div className="flex items-center gap-2 text-primary">
-                <Heart className="fill-current h-5 w-5" />
-                <span className="font-bold">Built for the community, powered by passion.</span>
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h2 className="text-4xl font-black tracking-tighter">The Visionary Behind the Hub</h2>
+                <p className="text-muted-foreground leading-relaxed text-lg font-light">
+                  As a Computer Information Technology student, Ahsan Ali recognized the growing gap in AI accessibility. 
+                  Most powerful models were hidden behind paywalls or required users to surrender their digital privacy. 
+                  Ahsan AI Hub was created to bridge this gap, providing a secure sanctuary where anyone can leverage 
+                  cutting-edge intelligence for learning, building, and creating.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-6">
+                <div className="p-4 rounded-2xl bg-background/50 border border-primary/10">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-primary mb-1">Focus</h4>
+                  <p className="text-sm font-medium">Digital Sovereignty</p>
+                </div>
+                <div className="p-4 rounded-2xl bg-background/50 border border-primary/10">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-primary mb-1">Status</h4>
+                  <p className="text-sm font-medium">Active Deployment</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 p-4 rounded-2xl bg-primary/5 border border-primary/20">
+                <Shield className="text-primary h-5 w-5" />
+                <span className="text-sm font-bold tracking-tight italic text-primary/80">"Built for the community, powered by passion."</span>
               </div>
             </div>
           </div>
