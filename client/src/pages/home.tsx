@@ -19,18 +19,34 @@ export default function Home() {
 
   const subscribeMutation = useMutation({
     mutationFn: async (email: string) => {
-      await apiRequest("POST", "/api/subscribe", { email });
+      const res = await apiRequest("POST", "/api/subscribe", { email });
+      return res.json();
     },
     onSuccess: () => {
-      toast({ title: "Success!", description: "You've been added to the waitlist." });
+      toast({ 
+        title: "Success!", 
+        description: "You've been added to the waitlist. Check your email for updates!" 
+      });
       setEmail("");
     },
     onError: (error: Error) => {
       let message = "Something went wrong. Please check your connection or try again.";
-      if (error.message.includes("409")) message = "You are already on the waitlist!";
-      if (error.message.includes("400")) message = "Please enter a valid email address.";
+      let variant: "default" | "destructive" = "destructive";
       
-      toast({ title: "Waitlist Status", description: message, variant: message.includes("already") ? "default" : "destructive" });
+      if (error.message.includes("409")) {
+        message = "You're already on the waitlist!";
+        variant = "default";
+      } else if (error.message.includes("400")) {
+        message = "Please enter a valid email address.";
+      } else if (error.message.includes("Network")) {
+        message = "Network error. Please check your connection.";
+      }
+      
+      toast({ 
+        title: "Waitlist Error", 
+        description: message, 
+        variant 
+      });
     },
   });
 
@@ -77,16 +93,28 @@ export default function Home() {
               <Button 
                 size="lg" 
                 className="rounded-full h-12 px-10 bg-primary text-primary-foreground shadow-xl shadow-primary/20" 
-                disabled={subscribeMutation.isPending}
+                disabled={subscribeMutation.isPending || !email}
                 onClick={() => {
-                  if (email && /^\S+@\S+\.\S+$/.test(email)) {
-                    subscribeMutation.mutate(email);
+                  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                  if (!email) {
+                    toast({ 
+                      title: "Email Required", 
+                      description: "Please enter your email address.", 
+                      variant: "destructive" 
+                    });
+                  } else if (!emailRegex.test(email)) {
+                    toast({ 
+                      title: "Invalid Email", 
+                      description: "Please enter a valid email address.", 
+                      variant: "destructive" 
+                    });
                   } else {
-                    toast({ title: "Invalid Email", description: "Please enter a valid email address.", variant: "destructive" });
+                    subscribeMutation.mutate(email);
                   }
                 }}
+                data-testid="button-notify-me"
               >
-                Notify Me
+                {subscribeMutation.isPending ? "Adding..." : "Notify Me"}
               </Button>
             </div>
           </div>
