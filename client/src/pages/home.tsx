@@ -181,62 +181,68 @@ export default function Home() {
       </section>
 
       {/* Detailed Features Section */}
-      <section className="py-24 px-6 border-t">
+      <section className="py-24 px-6 border-t bg-gradient-to-b from-muted/30 to-background">
         <div className="container mx-auto">
-          <div className="grid gap-16 lg:grid-cols-2 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Comprehensive Toolset</h2>
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="mt-1 h-8 w-8 shrink-0 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <MessageSquare size={18} />
+          <div className="grid gap-20 lg:grid-cols-2 items-center">
+            <div className="space-y-8">
+              <div>
+                <Badge variant="outline" className="mb-4 text-primary border-primary/20">Advanced Capability</Badge>
+                <h2 className="text-4xl font-bold tracking-tight mb-6">Precision-Engineered Toolset</h2>
+                <p className="text-lg text-muted-foreground font-light leading-relaxed">
+                  Every tool in the Ahsan AI Hub is optimized for a specific professional workflow, 
+                  ensuring accuracy and depth in every response.
+                </p>
+              </div>
+              
+              <div className="space-y-8">
+                {[
+                  { title: "Intelligent Multi-Modal Chat", icon: MessageSquare, desc: "Context-aware conversations with personality mapping and dynamic response length control." },
+                  { title: "High-Logic Code Architecture", icon: Code, desc: "Structural analysis and logic breakdown for over 50 programming languages and frameworks." },
+                  { title: "Deep Academic Engine", icon: BookOpen, desc: "Algorithmic solving for complex math and automated curriculum generation for researchers." }
+                ].map((item) => (
+                  <div key={item.title} className="flex gap-6 group">
+                    <div className="mt-1 h-12 w-12 shrink-0 flex items-center justify-center rounded-2xl bg-primary/5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-inner">
+                      <item.icon size={22} />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{item.title}</h4>
+                      <p className="text-muted-foreground/80 leading-relaxed">{item.desc}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold">Intelligent Chat</h4>
-                    <p className="text-sm text-muted-foreground">Adjustable personality modes and response lengths tailored to your needs.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="mt-1 h-8 w-8 shrink-0 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Code size={18} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">Code Explainer</h4>
-                    <p className="text-sm text-muted-foreground">Understand complex logic with line-by-line breakdowns for multiple languages.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="mt-1 h-8 w-8 shrink-0 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <BookOpen size={18} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">Educational Support</h4>
-                    <p className="text-sm text-muted-foreground">Generate high-quality study materials and solve math problems with clear steps.</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
-            <div className="bg-muted/30 rounded-3xl p-8 border border-primary/10">
-              <h3 className="text-2xl font-bold mb-4">Privacy & Control</h3>
-              <p className="text-muted-foreground mb-6">
-                Unlike other platforms, Ahsan AI Hub operates entirely without server-side storage. 
-                Your conversations are private, your settings are local, and you have complete control 
-                to clear your data at any time.
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-center gap-2 text-sm">
-                  <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  <span>7-Day Local Auto-Cleanup</span>
-                </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  <span>Client-Side Request Throttling</span>
-                </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  <span>Data Export Functionality</span>
-                </li>
-              </ul>
+            
+            <div className="relative group">
+              <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-blue-500/20 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-700" />
+              <div className="relative bg-background/60 backdrop-blur-2xl rounded-[2rem] p-10 border border-primary/10 shadow-2xl">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="h-3 w-3 rounded-full bg-red-500/50" />
+                  <div className="h-3 w-3 rounded-full bg-yellow-500/50" />
+                  <div className="h-3 w-3 rounded-full bg-green-500/50" />
+                  <span className="ml-2 text-xs font-mono text-muted-foreground/60 uppercase tracking-widest">Privacy Protocol 1.0</span>
+                </div>
+                
+                <h3 className="text-3xl font-bold mb-6">Sovereign Data Control</h3>
+                <p className="text-muted-foreground text-lg mb-8 font-light leading-relaxed">
+                  We've architected a system that eliminates the need for central data logging. 
+                  By leveraging your browser's secure enclave, we provide a high-performance 
+                  experience that remains invisible to our servers.
+                </p>
+                
+                <div className="grid gap-4">
+                  {[
+                    "Ephemeral Session State",
+                    "Hardware-Accelerated Encryption",
+                    "Zero-Persistence Architecture"
+                  ].map((p) => (
+                    <div key={p} className="flex items-center gap-3 p-4 rounded-xl bg-primary/5 border border-primary/5 hover:border-primary/20 transition-all">
+                      <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                      <span className="text-sm font-medium tracking-wide">{p}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
