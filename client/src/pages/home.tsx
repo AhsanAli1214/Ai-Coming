@@ -37,8 +37,8 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full min-h-screen selection:bg-primary/20">
       {/* Decorative background elements */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px] animate-pulse" />
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none" style={{ contentVisibility: 'auto' }}>
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px]" />
         <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] rounded-full bg-primary/15 blur-[100px]" />
         <div className="absolute top-[30%] right-[10%] w-[30%] h-[30%] rounded-full bg-blue-500/5 blur-[100px]" />
       </div>
@@ -51,7 +51,7 @@ export default function Home() {
           
           <div className="flex justify-center mb-8 relative">
             <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-150 opacity-20" />
-            <img src={logoImg} alt="Ahsan AI Hub Logo" className="relative h-28 w-28 md:h-36 md:w-36 object-contain hover:scale-105 transition-transform duration-500 ease-out drop-shadow-2xl" loading="eager" decoding="async" />
+            <img src={logoImg} alt="Ahsan AI Hub Logo" className="relative h-28 w-28 md:h-36 md:w-36 object-contain drop-shadow-2xl" loading="eager" decoding="async" width="144" height="144" />
           </div>
 
           <h1 className="mb-6 text-6xl font-black tracking-tight lg:text-8xl bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60">
@@ -76,7 +76,7 @@ export default function Home() {
               />
               <Button 
                 size="lg" 
-                className="rounded-full h-12 px-10 bg-primary text-primary-foreground hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-primary/20" 
+                className="rounded-full h-12 px-10 bg-primary text-primary-foreground shadow-xl shadow-primary/20" 
                 disabled={subscribeMutation.isPending}
                 onClick={() => {
                   if (email && /^\S+@\S+\.\S+$/.test(email)) {
@@ -92,10 +92,10 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col items-center gap-6 mb-20">
-            <Button variant="outline" size="lg" asChild className="rounded-full border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary transition-all group px-8 h-14">
+            <Button variant="outline" size="lg" asChild className="rounded-full border-primary/20 bg-primary/5 text-primary group px-8 h-14">
               <Link href="/manual">
                 More About Ahsan AI Hub
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <div className="flex flex-wrap justify-center gap-8 text-muted-foreground/80 font-medium">
@@ -105,17 +105,17 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative group mt-20 max-w-5xl mx-auto">
-            <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 to-blue-500/30 rounded-[2rem] blur-2xl opacity-10 group-hover:opacity-30 transition duration-1000 group-hover:duration-200" />
+          <div className="relative mt-20 max-w-5xl mx-auto">
+            <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 to-blue-500/30 rounded-[2rem] blur-2xl opacity-10" />
             <div className="relative rounded-2xl overflow-hidden border border-primary/10 shadow-2xl bg-background/80 backdrop-blur-sm">
-              <img src={homeScreenshot} alt="Ahsan AI Hub Interface Preview" className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.01]" loading="lazy" decoding="async" />
+              <img src={homeScreenshot} alt="Ahsan AI Hub Interface Preview" className="w-full h-auto object-cover" loading="lazy" decoding="async" />
               
               {/* Technical Overlay */}
               <div className="absolute bottom-6 right-6 hidden md:block">
                 <div className="bg-black/80 backdrop-blur-2xl border border-white/10 p-5 rounded-2xl shadow-2xl space-y-4 max-w-xs ring-1 ring-white/5">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                      <div className="h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
                       <span className="text-[10px] font-bold uppercase tracking-widest text-white/90">Privacy Pulse Active</span>
                     </div>
                     <Badge variant="outline" className="text-[8px] h-4 border-white/10 text-white/40">v1.0.4</Badge>
@@ -178,7 +178,7 @@ export default function Home() {
             { title: "Contextual Translation", icon: Globe, desc: "Go beyond word-to-word translation with deep semantic understanding in 50+ languages." },
             { title: "PWA Optimized", icon: Sparkles, desc: "Install Ahsan AI Hub directly to your desktop or mobile for a seamless native experience." }
           ].map((f) => (
-            <Card key={f.title} className="hover-elevate border-primary/5 bg-gradient-to-br from-background to-muted/20 hover:border-primary/20 transition-all duration-500">
+            <Card key={f.title} className="border-primary/5 bg-gradient-to-br from-background to-muted/20">
               <CardHeader className="p-8">
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary shadow-inner">
                   <f.icon className="w-7 h-7" />
@@ -235,12 +235,12 @@ export default function Home() {
                   { title: "High-Logic Code Architecture", icon: Code, desc: "Structural analysis and logic breakdown for over 50 programming languages and frameworks." },
                   { title: "Deep Academic Engine", icon: BookOpen, desc: "Algorithmic solving for complex math and automated curriculum generation for researchers." }
                 ].map((item) => (
-                  <div key={item.title} className="flex gap-6 group">
-                    <div className="mt-1 h-12 w-12 shrink-0 flex items-center justify-center rounded-2xl bg-primary/5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-inner">
+                  <div key={item.title} className="flex gap-6">
+                    <div className="mt-1 h-12 w-12 shrink-0 flex items-center justify-center rounded-2xl bg-primary/5 text-primary shadow-inner">
                       <item.icon size={22} />
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{item.title}</h4>
+                      <h4 className="text-xl font-bold mb-2">{item.title}</h4>
                       <p className="text-muted-foreground/80 leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
@@ -248,8 +248,8 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="relative group">
-              <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-blue-500/20 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-700" />
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-blue-500/20 rounded-[2.5rem] blur-2xl opacity-50" />
               <div className="relative bg-background/60 backdrop-blur-2xl rounded-[2rem] p-10 border border-primary/10 shadow-2xl">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="h-3 w-3 rounded-full bg-red-500/50" />
@@ -271,8 +271,8 @@ export default function Home() {
                     "Hardware-Accelerated Encryption",
                     "Zero-Persistence Architecture"
                   ].map((p) => (
-                    <div key={p} className="flex items-center gap-3 p-4 rounded-xl bg-primary/5 border border-primary/5 hover:border-primary/20 transition-all">
-                      <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                    <div key={p} className="flex items-center gap-3 p-4 rounded-xl bg-primary/5 border border-primary/5">
+                      <div className="h-2 w-2 rounded-full bg-primary" />
                       <span className="text-sm font-medium tracking-wide">{p}</span>
                     </div>
                   ))}
@@ -291,7 +291,7 @@ export default function Home() {
         
         <div className="container mx-auto max-w-4xl text-center relative z-10">
           <div className="inline-flex p-4 rounded-3xl bg-primary/10 mb-8 border border-primary/20 shadow-inner">
-            <Rocket className="h-8 w-8 text-primary animate-float" />
+            <Rocket className="h-8 w-8 text-primary" />
           </div>
           <h2 className="text-4xl md:text-5xl font-black mb-8 tracking-tighter">The Ahsan AI Vision</h2>
           <div className="space-y-6 text-xl text-muted-foreground leading-relaxed font-light">
@@ -306,7 +306,7 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="mt-16 pt-16 border-t border-primary/10 flex flex-wrap justify-center gap-12 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+          <div className="mt-16 pt-16 border-t border-primary/10 flex flex-wrap justify-center gap-12 grayscale opacity-50">
              <div className="flex items-center gap-2 font-bold text-sm tracking-widest uppercase">Secure</div>
              <div className="flex items-center gap-2 font-bold text-sm tracking-widest uppercase">Open</div>
              <div className="flex items-center gap-2 font-bold text-sm tracking-widest uppercase">Private</div>
