@@ -34,40 +34,45 @@ export default function Home() {
     <div className="flex flex-col w-full min-h-screen selection:bg-primary/20">
       {/* Decorative background elements */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] rounded-full bg-primary/10 blur-[100px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] rounded-full bg-primary/15 blur-[100px]" />
+        <div className="absolute top-[30%] right-[10%] w-[30%] h-[30%] rounded-full bg-blue-500/5 blur-[100px]" />
       </div>
-      <section className="relative py-20 px-6 overflow-hidden bg-gradient-to-b from-primary/10 via-background to-background border-b">
+
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden bg-gradient-to-b from-primary/10 via-background to-background">
         <div className="container mx-auto text-center relative z-10">
-          <Badge variant="outline" className="mb-6 px-4 py-1 text-sm font-medium border-primary/20 bg-primary/5 text-primary animate-pulse">
-            ✨ Launching Soon
+          <Badge variant="outline" className="mb-8 px-5 py-1.5 text-xs font-semibold uppercase tracking-wider border-primary/30 bg-primary/5 text-primary shadow-sm">
+            ✨ Premium Productivity Suite
           </Badge>
-          <div className="flex justify-center mb-6">
-            <img src={logoImg} alt="Ahsan AI Hub Logo" className="h-24 w-24 md:h-32 md:w-32 object-contain hover:scale-105 transition-transform duration-300" />
+          
+          <div className="flex justify-center mb-8 relative">
+            <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-150 opacity-20" />
+            <img src={logoImg} alt="Ahsan AI Hub Logo" className="relative h-28 w-28 md:h-36 md:w-36 object-contain hover:scale-105 transition-transform duration-500 ease-out drop-shadow-2xl" />
           </div>
-          <h1 className="mb-6 text-5xl font-extrabold tracking-tight lg:text-7xl">
+
+          <h1 className="mb-6 text-6xl font-black tracking-tight lg:text-8xl bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60">
             Ahsan AI Hub
           </h1>
-          <p className="mx-auto mb-10 max-w-[800px] text-xl text-muted-foreground leading-relaxed">
-            The ultimate privacy-first productivity suite. Empowering creators and students with 
-            advanced AI tools, zero data storage, and 100% free access. 
-            Experience real-time text-to-speech, contextual translations, and intelligent code assistance 
-            in a seamless, secure, and professional environment.
+          
+          <p className="mx-auto mb-12 max-w-[850px] text-xl md:text-2xl text-muted-foreground leading-relaxed font-light">
+            The ultimate <span className="text-foreground font-medium">privacy-first</span> AI productivity suite. 
+            Empowering creators with professional intelligence, <span className="text-foreground font-medium">zero server-side storage</span>, 
+            and 100% free access.
           </p>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-lg mx-auto mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            <div className="flex-1 flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-xl mx-auto mb-16">
+            <div className="flex-1 flex flex-col sm:flex-row gap-3 p-2 bg-background/40 backdrop-blur-xl border border-primary/10 rounded-full shadow-2xl">
               <Input 
                 type="email" 
-                placeholder="Enter your email for early access" 
+                placeholder="Enter email for early access" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="rounded-full h-12 bg-background/50 backdrop-blur-sm border-primary/20 focus-visible:ring-primary/30"
+                className="flex-1 h-12 bg-transparent border-0 focus-visible:ring-0 text-lg px-6"
               />
               <Button 
                 size="lg" 
-                className="rounded-full h-12 px-8 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all" 
+                className="rounded-full h-12 px-10 bg-primary text-primary-foreground hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-primary/20" 
                 disabled={subscribeMutation.isPending}
                 onClick={() => {
                   if (email && /^\S+@\S+\.\S+$/.test(email)) {
@@ -82,67 +87,69 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-4 mb-12">
-            <Button variant="outline" size="lg" asChild className="rounded-full border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary transition-all group">
-              <Link href="/manual">
-                More About Ahsan AI Hub
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-            <p className="text-xs text-muted-foreground/60 uppercase tracking-widest font-medium">
-              Innovation without surveillance • Intelligence without cost
-            </p>
+          {/* Floating Features Bar */}
+          <div className="flex flex-wrap justify-center gap-8 mb-20 text-muted-foreground/80 font-medium">
+            <div className="flex items-center gap-2"><Shield size={18} className="text-primary" /> End-to-End Privacy</div>
+            <div className="flex items-center gap-2"><Zap size={18} className="text-primary" /> Instant Response</div>
+            <div className="flex items-center gap-2"><Rocket size={18} className="text-primary" /> No Login Required</div>
           </div>
 
           {/* Screenshot Preview */}
-          <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-primary/10 shadow-2xl shadow-primary/5">
-            <img src={homeScreenshot} alt="Ahsan AI Hub Interface Preview" className="w-full h-auto object-cover" />
+          <div className="relative max-w-5xl mx-auto group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-blue-500/50 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+            <div className="relative rounded-2xl overflow-hidden border border-primary/10 shadow-2xl bg-background">
+              <img src={homeScreenshot} alt="Ahsan AI Hub Interface Preview" className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.01]" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 border-b bg-muted/20">
+      {/* Trust Banner */}
+      <section className="py-12 border-y bg-muted/30 backdrop-blur-sm">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {[
-              { label: "AI Tools", value: "9+" },
-              { label: "Pages", value: "13+" },
-              { label: "Privacy", value: "100%" },
-              { label: "Cost", value: "$0" },
+              { label: "AI Tools", value: "9+", icon: Wand2 },
+              { label: "Specialized Pages", value: "13+", icon: BookOpen },
+              { label: "Privacy Rating", value: "100%", icon: Shield },
+              { label: "Subscription", value: "$0", icon: Zap },
             ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">{stat.value}</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">{stat.label}</div>
+              <div key={stat.label} className="flex flex-col items-center">
+                <stat.icon className="w-5 h-5 text-primary/60 mb-3" />
+                <div className="text-4xl font-black text-foreground mb-1 tracking-tight">{stat.value}</div>
+                <div className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] font-bold">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features Overview */}
-      <section className="py-24 px-6 container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">The Complete AI Experience</h2>
-          <p className="text-muted-foreground">Premium features, zero cost, absolute privacy.</p>
+      {/* Feature Grid - Reimagined */}
+      <section className="py-32 px-6 container mx-auto">
+        <div className="max-w-3xl mb-24">
+          <h2 className="text-4xl font-bold mb-6 tracking-tight">The Complete AI Ecosystem</h2>
+          <p className="text-xl text-muted-foreground font-light leading-relaxed">
+            Designed for professional creators and students who demand high performance 
+            without sacrificing their digital security.
+          </p>
         </div>
         
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {[
-            { title: "Privacy-First", icon: Shield, desc: "Absolute security with local data encryption. Your history never leaves your device." },
-            { title: "Enterprise Intelligence", icon: Zap, desc: "Leveraging world-class AI models for human-like reasoning and creative power." },
-            { title: "9+ Pro Tools", icon: Wand2, desc: "Specialized suite for blog generation, email drafting, and rapid code analysis." },
-            { title: "Frictionless Access", icon: Rocket, desc: "No sign-ups, no logins. 100% of the platform is ready for you instantly." },
-            { title: "Global Reach", icon: Globe, desc: "Deep translation support for 50+ languages with contextual accuracy." },
-            { title: "Native Experience", icon: Sparkles, desc: "Progressive Web App support for a smooth mobile and desktop experience." }
+            { title: "Privacy-First Architecture", icon: Shield, desc: "Absolute security with local-only data encryption. Your history stays in your browser's IndexedDB." },
+            { title: "Human-Grade Logic", icon: Zap, desc: "Powered by Gemini 2.0 Flash for reasoning that rivals enterprise-level AI solutions." },
+            { title: "Specialized Content Studio", icon: Wand2, desc: "Tailored tools for blog architecture, email conversion, and long-form academic writing." },
+            { title: "Zero Friction Experience", icon: Rocket, desc: "Skip the sign-up. 100% of our platform is available from the moment you land on our site." },
+            { title: "Contextual Translation", icon: Globe, desc: "Go beyond word-to-word translation with deep semantic understanding in 50+ languages." },
+            { title: "PWA Optimized", icon: Sparkles, desc: "Install Ahsan AI Hub directly to your desktop or mobile for a seamless native experience." }
           ].map((f) => (
-            <Card key={f.title} className="hover-elevate border-primary/10">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center mb-4 text-primary">
-                  <f.icon className="w-6 h-6" />
+            <Card key={f.title} className="hover-elevate border-primary/5 bg-gradient-to-br from-background to-muted/20 hover:border-primary/20 transition-all duration-500">
+              <CardHeader className="p-8">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary shadow-inner">
+                  <f.icon className="w-7 h-7" />
                 </div>
-                <CardTitle>{f.title}</CardTitle>
-                <CardDescription className="text-sm leading-relaxed">{f.desc}</CardDescription>
+                <CardTitle className="text-2xl mb-3">{f.title}</CardTitle>
+                <CardDescription className="text-base text-muted-foreground/80 leading-relaxed font-light">{f.desc}</CardDescription>
               </CardHeader>
             </Card>
           ))}
