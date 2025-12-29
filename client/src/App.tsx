@@ -23,6 +23,7 @@ function Router() {
     <Suspense fallback={<LoadingFallback />}>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/manual" component={Manual} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

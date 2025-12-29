@@ -19,16 +19,19 @@ export async function registerRoutes(
 
       // Store in Supabase
       try {
+        console.log("Attempting to store in Supabase:", input.email);
         const { error } = await supabase
           .from('subscribers')
           .insert([{ email: input.email }]);
         
         if (error) {
           console.error("Supabase storage error:", error);
-          // We don't fail the request if Supabase fails but local storage succeeded
+          // Return error to user if supabase fails and we need it for waitlist
+          return res.status(500).json({ message: "Subscription failed. Please try again later." });
         }
       } catch (supaErr) {
         console.error("Supabase connection error:", supaErr);
+        return res.status(500).json({ message: "Service connection error. Please try again." });
       }
 
       res.status(201).json({ message: "Subscribed!", id: subscriber.id });

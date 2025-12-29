@@ -12,6 +12,8 @@ import logoImg from "@assets/icon-removebg-preview_1766949541761.png";
 import studioScreenshot from "@assets/image_1766949590945.png";
 import settingsScreenshot from "@assets/image_1766949639025.png";
 import aboutScreenshot from "@assets/image_1766949663942.png";
+import contactScreenshot from "@assets/image_1767020440364.png";
+import historyScreenshot from "@assets/image_1767020537324.png";
 
 export default function Manual() {
   return (
@@ -152,6 +154,24 @@ export default function Manual() {
             <h2 className="text-3xl font-bold mb-4">Core Capabilities</h2>
             <p className="text-muted-foreground">Professional-grade tools distributed across 13 specialized pages.</p>
           </div>
+          
+          <div className="grid gap-8 md:grid-cols-2 mb-12">
+            <Card className="overflow-hidden border-primary/10">
+              <img src={historyScreenshot} alt="Chat History Interface" className="w-full h-auto" />
+              <CardContent className="p-4 bg-muted/20">
+                <h4 className="font-bold mb-1">Conversation Management</h4>
+                <p className="text-sm text-muted-foreground">Resume, delete, or organize your past AI interactions with ease.</p>
+              </CardContent>
+            </Card>
+            <Card className="overflow-hidden border-primary/10">
+              <img src={contactScreenshot} alt="Contact & Support Interface" className="w-full h-auto" />
+              <CardContent className="p-4 bg-muted/20">
+                <h4 className="font-bold mb-1">Direct Support Channel</h4>
+                <p className="text-sm text-muted-foreground">Submit bug reports, feature requests, or collaboration inquiries directly.</p>
+              </CardContent>
+            </Card>
+          </div>
+
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               { title: "Intelligent Chat", icon: MessageSquare, desc: "Dynamic conversations with modes like 'Friendly' or 'Teacher'. Supports 50+ languages." },

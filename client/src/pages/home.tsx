@@ -25,8 +25,11 @@ export default function Home() {
       toast({ title: "Success!", description: "You've been added to the waitlist." });
       setEmail("");
     },
-    onError: () => {
-      toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
+    onError: (error: Error) => {
+      const message = error.message.includes("409") 
+        ? "You are already on the waitlist!" 
+        : "Something went wrong. Please check your connection or try again.";
+      toast({ title: "Waitlist Error", description: message, variant: "destructive" });
     },
   });
 
@@ -87,11 +90,18 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Floating Features Bar */}
-          <div className="flex flex-wrap justify-center gap-8 mb-20 text-muted-foreground/80 font-medium">
-            <div className="flex items-center gap-2"><Shield size={18} className="text-primary" /> End-to-End Privacy</div>
-            <div className="flex items-center gap-2"><Zap size={18} className="text-primary" /> Instant Response</div>
-            <div className="flex items-center gap-2"><Rocket size={18} className="text-primary" /> No Login Required</div>
+          <div className="flex flex-col items-center gap-6 mb-20">
+            <Button variant="outline" size="lg" asChild className="rounded-full border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary transition-all group px-8 h-14">
+              <Link href="/manual">
+                More About Ahsan AI Hub
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+            <div className="flex flex-wrap justify-center gap-8 text-muted-foreground/80 font-medium">
+              <div className="flex items-center gap-2"><Shield size={18} className="text-primary" /> End-to-End Privacy</div>
+              <div className="flex items-center gap-2"><Zap size={18} className="text-primary" /> Instant Response</div>
+              <div className="flex items-center gap-2"><Rocket size={18} className="text-primary" /> No Login Required</div>
+            </div>
           </div>
 
           {/* Screenshot Preview */}
