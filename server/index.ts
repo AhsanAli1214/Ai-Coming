@@ -22,6 +22,21 @@ app.use(
 
 app.use(express.urlencoded({ extended: false }));
 
+// Performance optimization: Set caching headers
+app.use((req, res, next) => {
+  // Cache static assets for 1 year
+  if (req.path.match(/\.(js|css|png|jpg|jpeg|gif|ico|webp|svg|woff2?)$/)) {
+    res.set('Cache-Control', 'public, max-age=31536000, immutable');
+  } else if (req.path.startsWith('/api')) {
+    // No caching for API requests
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  } else {
+    // Cache HTML for short period to allow updates
+    res.set('Cache-Control', 'public, max-age=300, must-revalidate');
+  }
+  next();
+});
+
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
     hour: "numeric",

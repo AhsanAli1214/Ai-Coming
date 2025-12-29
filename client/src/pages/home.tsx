@@ -51,7 +51,7 @@ export default function Home() {
           
           <div className="flex justify-center mb-8 relative">
             <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-150 opacity-20" />
-            <img src={logoImg} alt="Ahsan AI Hub Logo" className="relative h-28 w-28 md:h-36 md:w-36 object-contain hover:scale-105 transition-transform duration-500 ease-out drop-shadow-2xl" />
+            <img src={logoImg} alt="Ahsan AI Hub Logo" className="relative h-28 w-28 md:h-36 md:w-36 object-contain hover:scale-105 transition-transform duration-500 ease-out drop-shadow-2xl" loading="eager" decoding="async" />
           </div>
 
           <h1 className="mb-6 text-6xl font-black tracking-tight lg:text-8xl bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60">
@@ -108,7 +108,7 @@ export default function Home() {
           <div className="relative group mt-20 max-w-5xl mx-auto">
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 to-blue-500/30 rounded-[2rem] blur-2xl opacity-10 group-hover:opacity-30 transition duration-1000 group-hover:duration-200" />
             <div className="relative rounded-2xl overflow-hidden border border-primary/10 shadow-2xl bg-background/80 backdrop-blur-sm">
-              <img src={homeScreenshot} alt="Ahsan AI Hub Interface Preview" className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.01]" />
+              <img src={homeScreenshot} alt="Ahsan AI Hub Interface Preview" className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.01]" loading="lazy" decoding="async" />
               
               {/* Technical Overlay */}
               <div className="absolute bottom-6 right-6 hidden md:block">

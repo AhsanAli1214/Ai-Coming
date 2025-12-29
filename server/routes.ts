@@ -12,30 +12,30 @@ export async function registerRoutes(
     try {
       const input = api.subscribe.create.input.parse(req.body);
       
-      // Still store in local DB for redundancy/speed
+      // Check if already subscribed
       const existing = await storage.getSubscriberByEmail(input.email);
       if (existing) return res.status(409).json({ message: "Already subscribed" });
+      
+      // Store in local DB
       const subscriber = await storage.createSubscriber(input);
 
-      // Store in Supabase
-      try {
-        console.log("Attempting to store in Supabase:", input.email);
-        const { error } = await supabase
-          .from('subscribers')
-          .insert([{ email: input.email }]);
-        
-        if (error) {
-          console.error("Supabase storage error:", error);
-          // Return error to user if supabase fails and we need it for waitlist
-          return res.status(500).json({ message: "Subscription failed. Please try again later." });
+      // Try to store in Supabase (optional - doesn't block subscription)
+      if (process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY) {
+        try {
+          console.log("Storing in Supabase:", input.email);
+          await supabase
+            .from('subscribers')
+            .insert([{ email: input.email }])
+            .then();
+        } catch (supaErr) {
+          console.log("Supabase backup storage skipped:", supaErr);
+          // Continue - local storage is sufficient
         }
-      } catch (supaErr) {
-        console.error("Supabase connection error:", supaErr);
-        return res.status(500).json({ message: "Service connection error. Please try again." });
       }
 
       res.status(201).json({ message: "Subscribed!", id: subscriber.id });
     } catch (err) {
+      console.error("Subscription error:", err);
       res.status(400).json({ message: "Invalid input" });
     }
   });
