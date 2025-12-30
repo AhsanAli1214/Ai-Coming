@@ -13,20 +13,21 @@ export class GoogleSheetsStorage implements IStorage {
   private async getDoc() {
     if (this.doc) return this.doc;
 
-    const privateKey = process.env.GOOGLE_SHEETS_API_KEY
-      ?.replace(/\\n/g, '\n')
-      .replace(/\n/g, '\n')
-      .replace(/"/g, '')
+    const privateKey = (process.env.GOOGLE_SHEETS_API_KEY || "")
+      .replace(/\\n/g, '\n') // Handle escaped newlines
+      .replace(/\n/g, '\n') // Ensure actual newlines
+      .replace(/["']/g, '') // Remove any quotes
       .trim();
 
     if (!privateKey || !privateKey.includes('-----BEGIN PRIVATE KEY-----')) {
-      console.error("Storage Error: GOOGLE_SHEETS_API_KEY is missing or incorrectly formatted. Check your Secrets.");
-      throw new Error("Invalid or missing GOOGLE_SHEETS_API_KEY. Ensure it's a full Service Account Private Key.");
+      const msg = !privateKey ? "Missing GOOGLE_SHEETS_API_KEY" : "GOOGLE_SHEETS_API_KEY format is invalid (missing BEGIN PRIVATE KEY)";
+      console.error(`Storage Error: ${msg}. Check your Vercel Environment Variables.`);
+      throw new Error(`${msg}. Make sure you copied the FULL private key from the JSON file into Vercel.`);
     }
 
     if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL) {
       console.error("Storage Error: GOOGLE_SERVICE_ACCOUNT_EMAIL is missing.");
-      throw new Error("Missing GOOGLE_SERVICE_ACCOUNT_EMAIL secret.");
+      throw new Error("Missing GOOGLE_SERVICE_ACCOUNT_EMAIL. Add it to your Vercel Project Settings.");
     }
 
     const auth = new JWT({
