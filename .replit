@@ -50,3 +50,6 @@ expertMode = true
 [userenv.shared]
 SUPABASE_ANON_KEY = "sb_publishable_QgmAcr-AdVRog2snDbJzng_5TjkQFZq"
 SUPABASE_URL = "https://fytpxckbjidtowaxbdha.supabase.co"
+GOOGLE_SHEETS_ID = "1oiqy29es_ZqjMaLLxu4Wlbzz3fpI4OXnbFLN6sJ0yOU"
+GOOGLE_SHEETS_API_KEY = "AIzaSyC26YEajBWlZ4wHhAQRXSPqaVs6g1me1JQ"
+GOOGLE_SERVICE_ACCOUNT_EMAIL = "ahsan-ai-hub@ahsan-ai-hub-api.iam.gserviceaccount.com"
