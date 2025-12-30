@@ -50,6 +50,26 @@ export default function Home() {
     },
   });
 
+  const handleNotifyMe = (e: React.FormEvent) => {
+    e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      toast({ 
+        title: "Email Required", 
+        description: "Please enter your email address.", 
+        variant: "destructive" 
+      });
+    } else if (!emailRegex.test(email)) {
+      toast({ 
+        title: "Invalid Email", 
+        description: "Please enter a valid email address.", 
+        variant: "destructive" 
+      });
+    } else {
+      subscribeMutation.mutate(email);
+    }
+  };
+
   return (
     <div className="flex flex-col w-full min-h-screen selection:bg-primary/20">
       {/* Decorative background elements */}
@@ -81,7 +101,10 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-xl mx-auto mb-16">
-            <div className="flex-1 flex flex-col sm:flex-row gap-3 p-2 bg-background/40 backdrop-blur-xl border border-primary/10 rounded-full shadow-2xl">
+            <form 
+              onSubmit={handleNotifyMe}
+              className="flex-1 flex flex-col sm:flex-row gap-3 p-2 bg-background/40 backdrop-blur-xl border border-primary/10 rounded-full shadow-2xl"
+            >
               <Input 
                 type="email" 
                 placeholder="Enter email for early access" 
@@ -91,34 +114,16 @@ export default function Home() {
                 className="flex-1 h-12 bg-transparent border-0 focus-visible:ring-0 text-lg px-6"
               />
               <Button 
+                type="submit"
                 size="lg" 
                 className="rounded-full h-12 px-10 bg-primary text-primary-foreground shadow-xl shadow-primary/20" 
                 disabled={subscribeMutation.isPending || !email}
-                onClick={() => {
-                  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                  if (!email) {
-                    toast({ 
-                      title: "Email Required", 
-                      description: "Please enter your email address.", 
-                      variant: "destructive" 
-                    });
-                  } else if (!emailRegex.test(email)) {
-                    toast({ 
-                      title: "Invalid Email", 
-                      description: "Please enter a valid email address.", 
-                      variant: "destructive" 
-                    });
-                  } else {
-                    subscribeMutation.mutate(email);
-                  }
-                }}
                 data-testid="button-notify-me"
               >
                 {subscribeMutation.isPending ? "Adding..." : "Notify Me"}
               </Button>
             </form>
           </div>
-        </div>
 
           <div className="flex flex-col items-center gap-6 mb-20">
             <Button variant="outline" size="lg" asChild className="rounded-full border-primary/20 bg-primary/5 text-primary group px-8 h-14">
