@@ -1,5 +1,3 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet';
-import { JWT } from 'google-auth-library';
 import { type Subscriber, type InsertSubscriber } from "@shared/schema";
 
 export interface IStorage {
@@ -7,95 +5,29 @@ export interface IStorage {
   getSubscriberByEmail(email: string): Promise<Subscriber | undefined>;
 }
 
-export class GoogleSheetsStorage implements IStorage {
-  private doc: GoogleSpreadsheet | null = null;
+export class MemStorage implements IStorage {
+  private subscribers: Map<number, Subscriber>;
+  currentId: number;
 
-  private async getDoc() {
-    if (this.doc) return this.doc;
-
-    const privateKey = (process.env.GOOGLE_SHEETS_API_KEY || "")
-      .replace(/\\n/g, '\n') // Handle escaped newlines
-      .replace(/\n/g, '\n') // Ensure actual newlines
-      .replace(/["']/g, '') // Remove any quotes
-      .trim();
-
-    if (!privateKey || !privateKey.includes('-----BEGIN PRIVATE KEY-----')) {
-      const msg = !privateKey ? "Missing GOOGLE_SHEETS_API_KEY" : "GOOGLE_SHEETS_API_KEY format is invalid (missing BEGIN PRIVATE KEY)";
-      console.error(`Storage Error: ${msg}. Check your Vercel Environment Variables.`);
-      throw new Error(`${msg}. Make sure you copied the FULL private key from the JSON file into Vercel.`);
-    }
-
-    if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL) {
-      console.error("Storage Error: GOOGLE_SERVICE_ACCOUNT_EMAIL is missing.");
-      throw new Error("Missing GOOGLE_SERVICE_ACCOUNT_EMAIL. Add it to your Vercel Project Settings.");
-    }
-
-    const auth = new JWT({
-      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      key: privateKey,
-      scopes: [
-        'https://www.googleapis.com/auth/spreadsheets',
-        'https://www.googleapis.com/auth/drive.file',
-      ],
-    });
-
-    const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEETS_ID!, auth);
-    await doc.loadInfo();
-    this.doc = doc;
-    return this.doc;
+  constructor() {
+    this.subscribers = new Map();
+    this.currentId = 1;
   }
 
   async createSubscriber(insertSubscriber: InsertSubscriber): Promise<Subscriber> {
-    const doc = await this.getDoc();
-    const sheet = doc.sheetsByIndex[0];
-    
-    // Ensure headers exist
-    try {
-      await sheet.loadHeaderRow();
-      if (!sheet.headerValues.includes('email')) {
-        await sheet.setHeaderRow(['email', 'createdAt']);
-      }
-    } catch (e) {
-      console.log("Setting headers for the first time...");
-      await sheet.setHeaderRow(['email', 'createdAt']);
-    }
-
-    try {
-      console.log("Adding row for email:", insertSubscriber.email);
-      const row = await sheet.addRow({
-        email: insertSubscriber.email,
-        createdAt: new Date().toISOString()
-      });
-
-      if (!row) {
-        throw new Error("Google Sheets API returned no row. This usually means the sheet is not accessible.");
-      }
-
-      return {
-        id: row.rowNumber || Math.floor(Math.random() * 1000000),
-        email: insertSubscriber.email,
-        createdAt: new Date()
-      };
-    } catch (addError: any) {
-      console.error("Sheet AddRow Error Details:", addError?.message || addError);
-      throw new Error(`Failed to save to Google Sheets: ${addError?.message || "Unknown error"}. Ensure the sheet is shared with ${process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL}`);
-    }
+    const id = this.currentId++;
+    const subscriber: Subscriber = { 
+      ...insertSubscriber, 
+      id, 
+      createdAt: new Date() 
+    };
+    this.subscribers.set(id, subscriber);
+    return subscriber;
   }
 
   async getSubscriberByEmail(email: string): Promise<Subscriber | undefined> {
-    const doc = await this.getDoc();
-    const sheet = doc.sheetsByIndex[0];
-    const rows = await sheet.getRows();
-    
-    const row = rows.find(r => r.get('email') === email);
-    if (!row) return undefined;
-
-    return {
-      id: row.rowNumber,
-      email: row.get('email'),
-      createdAt: new Date(row.get('createdAt'))
-    };
+    return Array.from(this.subscribers.values()).find(s => s.email === email);
   }
 }
 
-export const storage = new GoogleSheetsStorage();
+export const storage = new MemStorage();

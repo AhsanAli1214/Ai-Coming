@@ -2,75 +2,14 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Sparkles, Shield, Zap, Rocket, BookOpen, MessageSquare, Wand2, Globe, Code } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
 import { Link } from "wouter";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 
 import logoImg from "@assets/icon-removebg-preview_1766949541761.png";
 import homeScreenshot from "@assets/image_1766949551550.png";
 
 export default function Home() {
-  const { toast } = useToast();
-  const [email, setEmail] = useState("");
-
-  const subscribeMutation = useMutation({
-    mutationFn: async (email: string) => {
-      const res = await apiRequest("POST", "/api/subscribe", { email });
-      return res.json();
-    },
-    onSuccess: () => {
-      toast({ 
-        title: "Success!", 
-        description: "You've been added to the waitlist. Check your email for updates!" 
-      });
-      setEmail("");
-    },
-    onError: (error: Error) => {
-      console.error("Subscription Error:", error);
-      let message = error.message || "Something went wrong. Please try again.";
-      let variant: "default" | "destructive" = "destructive";
-      
-      if (error.message.includes("409")) {
-        message = "You're already on the waitlist!";
-        variant = "default";
-      } else if (error.message.includes("400")) {
-        message = "Please enter a valid email address.";
-      } else if (error.message.includes("500")) {
-        message = "Server configuration error. Please try again later.";
-      }
-      
-      toast({ 
-        title: "Waitlist Status", 
-        description: message, 
-        variant 
-      });
-    },
-  });
-
-  const handleNotifyMe = (e: React.FormEvent) => {
-    e.preventDefault();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) {
-      toast({ 
-        title: "Email Required", 
-        description: "Please enter your email address.", 
-        variant: "destructive" 
-      });
-    } else if (!emailRegex.test(email)) {
-      toast({ 
-        title: "Invalid Email", 
-        description: "Please enter a valid email address.", 
-        variant: "destructive" 
-      });
-    } else {
-      subscribeMutation.mutate(email);
-    }
-  };
-
   return (
     <div className="flex flex-col w-full min-h-screen selection:bg-primary/20">
       {/* Decorative background elements */}
@@ -101,29 +40,39 @@ export default function Home() {
             and 100% free access.
           </p>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-xl mx-auto mb-16">
-            <form 
-              onSubmit={handleNotifyMe}
-              className="flex-1 flex flex-col sm:flex-row gap-3 p-2 bg-background/40 backdrop-blur-xl border border-primary/10 rounded-full shadow-2xl"
+          <div className="flex flex-col items-center gap-6 mb-16">
+            <a 
+              id="wa-waitlist"
+              href={`https://wa.me/15557818398?text=${encodeURIComponent(`Hello Ahsan AI Hub Team 👋🚀\n\nI’d love to get *early access* to Ahsan AI Hub and join the launch waitlist.\n\n🔹 Page: Ahsan AI Hub\n🔹 Link: ${typeof window !== 'undefined' ? window.location.href : ''}\n🔹 Device: ${typeof navigator !== 'undefined' && /Mobi|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop"}\n🔹 Time: ${new Date().toLocaleString()}\n\nPlease notify me when early access or beta is available.\nThank you! ✨`)}`}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="waitlist-btn group"
+              data-testid="link-whatsapp-waitlist"
             >
-              <Input 
-                type="email" 
-                placeholder="Enter email for early access" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="flex-1 h-12 bg-transparent border-0 focus-visible:ring-0 text-lg px-6"
-              />
-              <Button 
-                type="submit"
-                size="lg" 
-                className="rounded-full h-12 px-10 bg-primary text-primary-foreground shadow-xl shadow-primary/20" 
-                disabled={subscribeMutation.isPending || !email}
-                data-testid="button-notify-me"
-              >
-                {subscribeMutation.isPending ? "Adding..." : "Notify Me"}
-              </Button>
-            </form>
+              🚀 Get Early Access
+            </a>
+
+            <style>{`
+              .waitlist-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                background: linear-gradient(135deg, #4f46e5, #9333ea);
+                color: #ffffff;
+                padding: 14px 26px;
+                border-radius: 14px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                text-decoration: none;
+                box-shadow: 0 15px 35px rgba(79,70,229,0.35);
+                transition: all 0.3s ease;
+              }
+
+              .waitlist-btn:hover {
+                transform: translateY(-2px) scale(1.02);
+                box-shadow: 0 20px 45px rgba(147,51,234,0.45);
+              }
+            `}</style>
           </div>
 
           <div className="flex flex-col items-center gap-6 mb-20">
