@@ -15,13 +15,18 @@ export class GoogleSheetsStorage implements IStorage {
 
     const privateKey = process.env.GOOGLE_SHEETS_API_KEY
       ?.replace(/\\n/g, '\n')
-      .replace(/\n/g, '\n') // Ensure actual newlines
+      .replace(/\n/g, '\n')
       .replace(/"/g, '')
       .trim();
 
     if (!privateKey || !privateKey.includes('-----BEGIN PRIVATE KEY-----')) {
-      console.error("Storage Error: GOOGLE_SHEETS_API_KEY is missing or incorrectly formatted");
+      console.error("Storage Error: GOOGLE_SHEETS_API_KEY is missing or incorrectly formatted. Check your Secrets.");
       throw new Error("Invalid or missing GOOGLE_SHEETS_API_KEY. Ensure it's a full Service Account Private Key.");
+    }
+
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL) {
+      console.error("Storage Error: GOOGLE_SERVICE_ACCOUNT_EMAIL is missing.");
+      throw new Error("Missing GOOGLE_SERVICE_ACCOUNT_EMAIL secret.");
     }
 
     const auth = new JWT({
@@ -44,32 +49,35 @@ export class GoogleSheetsStorage implements IStorage {
     const sheet = doc.sheetsByIndex[0];
     
     // Ensure headers exist
-    await sheet.loadHeaderRow().catch(async () => {
+    try {
+      await sheet.loadHeaderRow();
+      if (!sheet.headerValues.includes('email')) {
+        await sheet.setHeaderRow(['email', 'createdAt']);
+      }
+    } catch (e) {
+      console.log("Setting headers for the first time...");
       await sheet.setHeaderRow(['email', 'createdAt']);
-    });
+    }
 
     try {
+      console.log("Adding row for email:", insertSubscriber.email);
       const row = await sheet.addRow({
         email: insertSubscriber.email,
         createdAt: new Date().toISOString()
       });
 
       if (!row) {
-        throw new Error("Failed to add row to Google Sheet. Check if the sheet is shared correctly.");
+        throw new Error("Google Sheets API returned no row. This usually means the sheet is not accessible.");
       }
-
-      // Handle row access safely for both versions of the library
-      const emailValue = row.get ? row.get('email') : (row as any).email;
-      const createdAtValue = row.get ? row.get('createdAt') : (row as any).createdAt;
 
       return {
         id: row.rowNumber || Math.floor(Math.random() * 1000000),
-        email: emailValue || insertSubscriber.email,
-        createdAt: createdAtValue ? new Date(createdAtValue) : new Date()
+        email: insertSubscriber.email,
+        createdAt: new Date()
       };
-    } catch (addError) {
-      console.error("Sheet AddRow Error:", addError);
-      throw new Error("Failed to save to Google Sheets. Please ensure the sheet is shared with the service account email.");
+    } catch (addError: any) {
+      console.error("Sheet AddRow Error Details:", addError?.message || addError);
+      throw new Error(`Failed to save to Google Sheets: ${addError?.message || "Unknown error"}. Ensure the sheet is shared with ${process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL}`);
     }
   }
 
