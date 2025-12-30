@@ -30,47 +30,60 @@ export default function Home() {
             <img src={logoImg} alt="Ahsan AI Hub Logo" className="relative h-28 w-28 md:h-36 md:w-36 object-contain drop-shadow-2xl" loading="eager" decoding="async" width="144" height="144" />
           </div>
 
-          <h1 className="mb-6 text-6xl font-black tracking-tight lg:text-8xl bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60">
-            Ahsan AI Hub
+          <h1 className="mb-6 text-6xl font-black tracking-tight lg:text-8xl bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60 animate-in fade-in slide-in-from-top-8 duration-1000">
+            Ahsan AI Launch
           </h1>
           
-          <p className="mx-auto mb-12 max-w-[850px] text-xl md:text-2xl text-muted-foreground leading-relaxed font-light">
+          <p className="mx-auto mb-12 max-w-[850px] text-xl md:text-2xl text-muted-foreground leading-relaxed font-light animate-in fade-in slide-in-from-top-4 duration-1000 delay-200">
             The ultimate <span className="text-foreground font-medium">privacy-first</span> AI productivity suite. 
             Empowering creators with professional intelligence, <span className="text-foreground font-medium">zero server-side storage</span>, 
             and 100% free access.
           </p>
           
-          <div className="flex flex-col items-center gap-6 mb-16">
+          <div className="flex flex-col items-center gap-6 mb-16 animate-in fade-in zoom-in slide-in-from-bottom-8 duration-1000 delay-500">
             <a 
               id="wa-waitlist"
-              href={`https://wa.me/15557818398?text=${encodeURIComponent(`Hello Ahsan AI Hub Team 👋🚀\n\nI’d love to get *early access* to Ahsan AI Hub and join the launch waitlist.\n\n🔹 Page: Ahsan AI Hub\n🔹 Link: ${typeof window !== 'undefined' ? window.location.href : ''}\n🔹 Device: ${typeof navigator !== 'undefined' && /Mobi|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop"}\n🔹 Time: ${new Date().toLocaleString()}\n\nPlease notify me when early access or beta is available.\nThank you! ✨`)}`}
+              href={`https://wa.me/15557818398?text=${encodeURIComponent(`Hello Ahsan AI Hub Team 👋🚀\n\nI’d love to get *early access* to Ahsan AI Launch and join the launch waitlist.\n\n🔹 Page: Ahsan AI Launch\n🔹 Link: ${typeof window !== 'undefined' ? window.location.href : ''}\n🔹 Device: ${typeof navigator !== 'undefined' && /Mobi|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop"}\n🔹 Time: ${new Date().toLocaleString()}\n\nPlease notify me when early access or beta is available.\nThank you! ✨`)}`}
               target="_blank" 
               rel="noopener noreferrer"
-              className="waitlist-btn group"
+              className="waitlist-btn group relative overflow-hidden"
               data-testid="link-whatsapp-waitlist"
             >
-              🚀 Get Early Access
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+              <span className="relative z-10 flex items-center gap-3">
+                <SiWhatsapp className="w-6 h-6 animate-pulse" />
+                🚀 Get Early Access to Launch
+              </span>
             </a>
 
             <style>{`
               .waitlist-btn {
                 display: inline-flex;
                 align-items: center;
-                gap: 10px;
-                background: linear-gradient(135deg, #4f46e5, #9333ea);
+                background: linear-gradient(135deg, #4f46e5, #9333ea, #ec4899);
+                background-size: 200% 200%;
+                animation: gradient-shift 5s ease infinite;
                 color: #ffffff;
-                padding: 14px 26px;
-                border-radius: 14px;
-                font-size: 1.1rem;
-                font-weight: 600;
+                padding: 20px 40px;
+                border-radius: 20px;
+                font-size: 1.25rem;
+                font-weight: 800;
                 text-decoration: none;
-                box-shadow: 0 15px 35px rgba(79,70,229,0.35);
-                transition: all 0.3s ease;
+                box-shadow: 0 20px 40px rgba(79,70,229,0.4);
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                border: 1px solid rgba(255,255,255,0.2);
+                backdrop-filter: blur(10px);
+              }
+
+              @keyframes gradient-shift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
               }
 
               .waitlist-btn:hover {
-                transform: translateY(-2px) scale(1.02);
-                box-shadow: 0 20px 45px rgba(147,51,234,0.45);
+                transform: translateY(-5px) scale(1.05);
+                box-shadow: 0 30px 60px rgba(147,51,234,0.5);
               }
             `}</style>
           </div>
