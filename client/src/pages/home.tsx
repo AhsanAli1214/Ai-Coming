@@ -30,7 +30,8 @@ export default function Home() {
       setEmail("");
     },
     onError: (error: Error) => {
-      let message = "Something went wrong. Please check your connection or try again.";
+      console.error("Subscription Error:", error);
+      let message = error.message || "Something went wrong. Please try again.";
       let variant: "default" | "destructive" = "destructive";
       
       if (error.message.includes("409")) {
@@ -38,12 +39,12 @@ export default function Home() {
         variant = "default";
       } else if (error.message.includes("400")) {
         message = "Please enter a valid email address.";
-      } else if (error.message.includes("Network")) {
-        message = "Network error. Please check your connection.";
+      } else if (error.message.includes("500")) {
+        message = "Server configuration error. Please try again later.";
       }
       
       toast({ 
-        title: "Waitlist Error", 
+        title: "Waitlist Status", 
         description: message, 
         variant 
       });
