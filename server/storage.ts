@@ -43,16 +43,34 @@ export class GoogleSheetsStorage implements IStorage {
     const doc = await this.getDoc();
     const sheet = doc.sheetsByIndex[0];
     
-    const row = await sheet.addRow({
-      email: insertSubscriber.email,
-      createdAt: new Date().toISOString()
+    // Ensure headers exist
+    await sheet.loadHeaderRow().catch(async () => {
+      await sheet.setHeaderRow(['email', 'createdAt']);
     });
 
-    return {
-      id: row.rowNumber,
-      email: insertSubscriber.email,
-      createdAt: new Date()
-    };
+    try {
+      const row = await sheet.addRow({
+        email: insertSubscriber.email,
+        createdAt: new Date().toISOString()
+      });
+
+      if (!row) {
+        throw new Error("Failed to add row to Google Sheet. Check if the sheet is shared correctly.");
+      }
+
+      // Handle row access safely for both versions of the library
+      const emailValue = row.get ? row.get('email') : (row as any).email;
+      const createdAtValue = row.get ? row.get('createdAt') : (row as any).createdAt;
+
+      return {
+        id: row.rowNumber || Math.floor(Math.random() * 1000000),
+        email: emailValue || insertSubscriber.email,
+        createdAt: createdAtValue ? new Date(createdAtValue) : new Date()
+      };
+    } catch (addError) {
+      console.error("Sheet AddRow Error:", addError);
+      throw new Error("Failed to save to Google Sheets. Please ensure the sheet is shared with the service account email.");
+    }
   }
 
   async getSubscriberByEmail(email: string): Promise<Subscriber | undefined> {
