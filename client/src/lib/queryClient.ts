@@ -4,10 +4,17 @@ async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
     let errorMessage = res.statusText;
     try {
-      const body = await res.json();
+      // Clone the response before reading it so the caller can still read it if needed
+      const resClone = res.clone();
+      const body = await resClone.json();
       errorMessage = body.message || errorMessage;
     } catch {
-      errorMessage = await res.text() || res.statusText;
+      try {
+        const resClone = res.clone();
+        errorMessage = await resClone.text() || res.statusText;
+      } catch {
+        // Fallback if even text() fails
+      }
     }
     throw new Error(`${res.status}: ${errorMessage}`);
   }
