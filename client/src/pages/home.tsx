@@ -116,8 +116,9 @@ export default function Home() {
               >
                 {subscribeMutation.isPending ? "Adding..." : "Notify Me"}
               </Button>
-            </div>
+            </form>
           </div>
+        </div>
 
           <div className="flex flex-col items-center gap-6 mb-20">
             <Button variant="outline" size="lg" asChild className="rounded-full border-primary/20 bg-primary/5 text-primary group px-8 h-14">
