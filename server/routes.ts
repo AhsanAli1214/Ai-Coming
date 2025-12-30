@@ -20,7 +20,13 @@ export async function registerRoutes(
 
       res.status(201).json({ message: "Subscribed!", id: subscriber.id });
     } catch (err) {
-      console.error("Subscription error:", err);
+      console.error("Subscription error details:", err);
+      if (err instanceof Error) {
+        if (err.message.includes("GOOGLE_SHEETS_API_KEY")) {
+          return res.status(500).json({ message: "Storage configuration error. Please contact admin." });
+        }
+        return res.status(400).json({ message: err.message });
+      }
       res.status(400).json({ message: "Invalid input or storage error" });
     }
   });

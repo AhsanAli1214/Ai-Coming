@@ -13,9 +13,20 @@ export class GoogleSheetsStorage implements IStorage {
   private async getDoc() {
     if (this.doc) return this.doc;
 
+    const privateKey = process.env.GOOGLE_SHEETS_API_KEY
+      ?.replace(/\\n/g, '\n')
+      .replace(/\n/g, '\n') // Ensure actual newlines
+      .replace(/"/g, '')
+      .trim();
+
+    if (!privateKey || !privateKey.includes('-----BEGIN PRIVATE KEY-----')) {
+      console.error("Storage Error: GOOGLE_SHEETS_API_KEY is missing or incorrectly formatted");
+      throw new Error("Invalid or missing GOOGLE_SHEETS_API_KEY. Ensure it's a full Service Account Private Key.");
+    }
+
     const auth = new JWT({
       email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      key: process.env.GOOGLE_SHEETS_API_KEY?.replace(/\\n/g, '\n').replace(/"/g, ''),
+      key: privateKey,
       scopes: [
         'https://www.googleapis.com/auth/spreadsheets',
         'https://www.googleapis.com/auth/drive.file',
